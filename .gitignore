@@ -1,0 +1,5 @@
+﻿# Los tres repos se descargan con clonar_todo.ps1 (son repos aparte)
+/taller_microduck_v2/
+/workshop-ia-fisica/
+/workshop-ia-fisica-ponente/
+*.log

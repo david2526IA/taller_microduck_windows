@@ -1,0 +1,15 @@
+﻿{
+  "folders": [
+    { "name": "Asistentes (workshop-ia-fisica)", "path": "workshop-ia-fisica" },
+    { "name": "Ponente (workshop-ia-fisica-ponente)", "path": "workshop-ia-fisica-ponente" },
+    { "name": "Copia completa (taller_microduck_v2)", "path": "taller_microduck_v2" },
+    { "name": "Este proyecto", "path": "." }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder:Asistentes (workshop-ia-fisica)}/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "files.exclude": { "**/__pycache__": true, "**/.venv": true },
+    "editor.minimap.enabled": false
+  },
+  "extensions": { "recommendations": ["ms-python.python", "ms-python.vscode-pylance"] }
+}
