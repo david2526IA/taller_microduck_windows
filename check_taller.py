@@ -40,9 +40,11 @@ except Exception as e:
 try:
     sys.path.insert(0, str(RAIZ / "windows"))
     t = time.time()
+    import contextlib, io
     import patada_env
-    env = patada_env.PatadaEnv()
-    x, y, casilla, cayo = env.step(0.9, "kick_right")
+    with contextlib.redirect_stdout(io.StringIO()):           # el codigo oficial imprime mucho al cargar
+        env = patada_env.PatadaEnv()
+        x, y, casilla, cayo = env.step(0.9, "kick_right")
     check(f"una patada simulada: la pelota llega a x={x:.2f} m ({time.time() - t:.0f} s)", x > 0.5 and not cayo)
 except Exception as e:
     check("entorno de entrenamiento de la patada", False, str(e)[:160])

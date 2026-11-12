@@ -2,6 +2,7 @@
 REM Uso:  lanzar.bat n4_00_partida_rayuela      (el nombre del ejercicio, sin .py)
 REM Las teclas se pulsan en esta ventana negra, no en la ventana del robot.
 cd /d "%~dp0"
+chcp 65001 >nul
 if "%1"=="" (
   echo Uso: lanzar.bat NOMBRE_DEL_EJERCICIO   p. ej.  lanzar.bat n4_00_partida_rayuela
   dir /b exercises_rayuela\*.py

@@ -6,6 +6,9 @@ Puedes saltarte pasos (s) o salir (q) y retomarlo cuando quieras.   Doble clic e
 """
 import pathlib, subprocess, sys
 
+for _f in (sys.stdout, sys.stderr):      # tildes y simbolos bien en la consola de Windows
+    _f.reconfigure(encoding="utf-8", errors="replace")
+
 RAIZ = pathlib.Path(__file__).resolve().parent
 PY = RAIZ / "workshop-ia-fisica" / ".venv" / "Scripts" / "python.exe"
 EJ = RAIZ / "exercises_rayuela"
