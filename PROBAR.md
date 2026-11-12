@@ -52,7 +52,7 @@ Después de `n3_05`, pon en `n4_00` → `TABLA_PROPIA = AQUI_RAIZ / "mi_tabla_pa
 | Ejercicio | Qué hace | Parámetros | Qué observar |
 |---|---|---|---|
 | **`n4_02_patines.py`** | El Microduck sobre patines (otro cuerpo, otro cerebro) | `VOLTAJE_BATERIA`, `RETRASO_MOTORES`, `POTENCIA_MOTORES`, `ROZAMIENTO`, `CEREBRO_RODAR`, `CEREBRO_QUIETO` | Teclas: flechas, `p` empujón, `n` nueva partida. Con retraso el equilibrio se rompe |
-| **`n4_03_cuerda.py`** | Dos Microducks unidos por una cuerda, cada uno tirando de un lado | `FUERZA_A/B`, `MASA_A/B`, `ROZAMIENTO_SUELO`, `LARGO_CUERDA`, `RIGIDEZ_CUERDA` | Teclas `w/s` y `i/k` para tirar más o menos, `n` reiniciar. **Honestidad:** usa el cerebro de andar; el repo `microduck-tug-of-war` aún no tiene una política competitiva entrenada |
+| **`n4_03_cuerda.py`** | **El duelo de la cuerda con una política ENTRENADA** (proyecto `patos_cuerda`): dos Microducks atados, gana quien cruza la línea contraria o hace caer al otro | `AVANCE_A/B` (cuánto tira cada uno), `FUERZA_B`, `MASA_A/B`, `ROZAMIENTO_SUELO`, `LARGO_CUERDA`, `DESPLAZAMIENTO`, `RUIDO_INICIAL`, `B_SOLO_ANDA` (B sin entrenar para el duelo), `TIEMPO_MAX` | Teclas `w/s` e `i/k` para que cada uno tire más o menos, `n` combate nuevo. Prueba `B_SOLO_ANDA = True`: ¿cuánto aporta entrenar con recompensa competitiva? |
 | **`n4_04_balancin.py`** | El Microduck de pie sobre una tabla que se inclina | `LARGO_TABLA`, `INCLINACION_MAX`, `RIGIDEZ_MUELLE`, `AMORTIGUACION`, `MASA_TABLA`, `ROZAMIENTO`, `INCLINACION_INICIAL` | Por defecto aguanta. Baja `RIGIDEZ_MUELLE` a 0.3 y luego a 0: ¿dónde se rompe? Es la idea de la aleatorización del dominio |
 
 ## Lo que está probado y lo que no

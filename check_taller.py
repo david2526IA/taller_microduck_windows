@@ -49,13 +49,16 @@ try:
 except Exception as e:
     check("entorno de entrenamiento de la patada", False, str(e)[:160])
 
-# la escena de la cuerda (la genera el constructor oficial la primera vez)
+# el duelo de la cuerda: escena de dos patos (la genera el constructor oficial), motores BAM y el cerebro entrenado
 try:
-    import cuerda  # noqa: F401
-    cuerda._generar_escena()
-    check("escena de la cuerda (dos patos)", cuerda.ESCENA.exists(), "no se pudo generar")
+    import contextlib, io
+    import duelo
+    check("cerebro del duelo (duelo2.onnx)", duelo.POLITICA_DUELO.exists(), "falta windows/politicas/duelo2.onnx")
+    with contextlib.redirect_stdout(io.StringIO()):
+        m2, d2, ctrl, nombres = duelo.cargar_mundo(1.0, 1.0, 1.0, 1.0, 1.0)
+    check(f"escena de la cuerda con motores BAM ({len(nombres)} motores, 2 patos)", len(nombres) == 28)
 except Exception as e:
-    check("escena de la cuerda", False, str(e)[:160])
+    check("el duelo de la cuerda", False, str(e)[:160])
 
 if "--viewer" in sys.argv and fallos == 0:
     import mujoco.viewer
