@@ -1,0 +1,7 @@
+{
+  "python.terminal.activateEnvironment": true,
+  "files.exclude": { "**/__pycache__": true, "**/.venv": true },
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "explorer.compactFolders": false
+}

@@ -30,9 +30,9 @@ OBJETIVO = 5
 VELOCIDAD_PATADA = 0.9
 
 # Tu politica de patada entrenada en n3_05 (un .json). Con ella, las teclas 1-9 patean como TU la entrenaste.
+#   Si todavia no has entrenado (n3_05), no existe el fichero y se usa la tabla OFICIAL; ponlo en None para no ver el aviso.
 #   AFECTA A: quien decide pie y velocidad al pulsar 1-9: la tabla OFICIAL (None) o TU cerebro. ¿Quien acierta mas?
-#   Ejemplo: TABLA_PROPIA = AQUI_RAIZ / "mi_tabla_patada.json"
-TABLA_PROPIA = None
+TABLA_PROPIA = pathlib.Path(__file__).resolve().parent.parent / "mi_tabla_patada.json"
 
 # Puntos segun el resultado: 0 = acierto, 1 = casilla vecina, 2 = cualquier otra.
 #   AFECTA A: el marcador. Prueba a premiar mas el acierto exacto: {0: 20, 1: 2, 2: 0}

@@ -1,10 +1,13 @@
-# Los tres repos se descargan con clonar_todo.ps1 (son repos aparte)
-/taller_microduck_v2/
-/workshop-ia-fisica/
-/workshop-ia-fisica-ponente/
-/rayuela-oficial/
-/tug-of-war/
-*.log
-mi_tabla_patada.json
+# Entornos y archivos generados
+.venv/
 __pycache__/
+*.pyc
+instalar_log.txt
+MUJOCO_LOG.TXT
+mi_tabla_patada.json
 windows/escenas/
+
+# Material solo del ponente (no se sube al repo de los asistentes)
+/taller_microduck_v2/
+/workshop-ia-fisica-ponente/
+/tug-of-war/

@@ -1,15 +1,10 @@
 {
   "folders": [
-    { "name": "Asistentes (workshop-ia-fisica)", "path": "workshop-ia-fisica" },
-    { "name": "Ponente (workshop-ia-fisica-ponente)", "path": "workshop-ia-fisica-ponente" },
-    { "name": "Copia completa (taller_microduck_v2)", "path": "taller_microduck_v2" },
-    { "name": "Caso: Rayuela oficial (Bravo Robots)", "path": "rayuela-oficial" },
-    { "name": "Caso: Tug of War (cuerda)", "path": "tug-of-war" },
-    { "name": "Este proyecto", "path": "." }
+    { "name": "Taller (empieza aqui)", "path": "." }
   ],
   "settings": {
-    "python.defaultInterpreterPath": "${workspaceFolder:Asistentes (workshop-ia-fisica)}/.venv/Scripts/python.exe",
-    "python.terminal.activateEnvironment": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/workshop-ia-fisica/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": false,
     "files.exclude": { "**/__pycache__": true, "**/.venv": true },
     "editor.minimap.enabled": false
   },

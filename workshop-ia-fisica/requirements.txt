@@ -1,0 +1,9 @@
+# Requisitos del workshop. Python 3.12 EXACTO (la libreria 'bam' exige <3.13).
+# Versiones fijadas = las probadas. Ejecutar siempre desde la carpeta del repo.
+mujoco==3.17.0
+onnxruntime==1.31.1
+numpy==2.5.4
+colorama
+# bam (Apache-2.0, Rhoban): copia del commit exacto del proyecto, incluida en wheels/ (no hace falta Git ni GitHub).
+./wheels/better_actuator_models-1.0.1-py3-none-any.whl
+opencv-python==5.0.0.93

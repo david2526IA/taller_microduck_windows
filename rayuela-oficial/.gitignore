@@ -1,0 +1,49 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.python-version
+# uv.lock
+
+
+
+# Virtual environments
+.venv
+
+# Logs and databases
+wandb
+logs
+agents
+cheats
+
+*.pch
+nohup.out
+*.onnx
+# ...except the policies the rayuela game loads, which ship with the repo.
+!policies-v1/*.onnx
+beyondmimic_motions/
+artifacts/
+*.npz
+
+src/mjlab_microduck/robot/microduck.bak/*
+src/mjlab_microduck/robot/microduck_test/*
+data/
+*.pt
+
+claude_experiments/
+
+backup_onnx/
+
+
+logdir/.claude/
+logdir/
+
+# colcon (ros2_microduck/)
+ros2_microduck/build/
+ros2_microduck/install/
+ros2_microduck/log/
+logdir/.claude/worktrees/
+

@@ -1,0 +1,5 @@
+@echo off
+REM Doble clic: la ruta guiada del taller, paso a paso.
+cd /d "%~dp0"
+workshop-ia-fisica\.venv\Scripts\python.exe ruta.py
+pause
