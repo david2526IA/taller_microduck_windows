@@ -12,6 +12,8 @@ Todo el taller a mano en VS Code. Este repo solo contiene el "envoltorio"; los t
 3. Doble clic en **`ABRIR_EN_VSCODE.bat`**.
 4. Comprueba: en `workshop-ia-fisica`, `COMPROBAR.bat` debe acabar en **TODO LISTO**.
 
+**Para probar el taller entero, ejercicio por ejercicio y con todos sus parámetros: [`PROBAR.md`](PROBAR.md).** Los ejercicios nuevos están en `exercises_rayuela/`.
+
 ## Qué se descarga
 | Carpeta | Contenido |
 |---|---|

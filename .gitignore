@@ -1,5 +1,10 @@
-﻿# Los tres repos se descargan con clonar_todo.ps1 (son repos aparte)
+# Los tres repos se descargan con clonar_todo.ps1 (son repos aparte)
 /taller_microduck_v2/
 /workshop-ia-fisica/
 /workshop-ia-fisica-ponente/
+/rayuela-oficial/
+/tug-of-war/
 *.log
+mi_tabla_patada.json
+__pycache__/
+windows/escenas/
