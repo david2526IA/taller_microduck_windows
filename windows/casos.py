@@ -50,6 +50,10 @@ from rayuela import rayuela_ipc as ipc, ros_utils, sim_setup, sim_worker  # noqa
 from rayuela import control_node, teleop_keyboard, vision_node  # noqa: E402  (codigo oficial)
 
 
+# Se ofrece una imagen cada 3 pasos de control; el hilo de la camara coge una cuando termina la anterior (~10 por segundo).
+sim_worker.IMAGE_PUBLISH_EVERY_N_CONTROL_STEPS = 3
+
+
 class Puente(Node):
     """Hace lo que bridge_node.py oficial: conecta la simulacion con los topicos. Aqui sin socket: va en el mismo proceso."""
 
@@ -89,14 +93,47 @@ class Puente(Node):
 class Mundo(sim_worker.SimWorker):
     """El SimWorker oficial, con el socket de ROS sustituido por el Puente en memoria y un boton de nueva partida."""
 
-    def __init__(self, *a, segundos=None, **k):
+    def __init__(self, *a, segundos=None, camara_siempre=False, **k):
         super().__init__(*a, **k)
         self._snap = (self.data.qpos.copy(), self.data.qvel.copy())
+        # LA CAMARA SOLO CUANDO HACE FALTA: renderizar 1280x720 cuesta ~75 ms por imagen y frenaba toda la simulacion
+        # (de 1400 pasos/s a ~19). La vision solo necesita ver al arrancar (calibrar el tablero) y tras cada patada.
+        self.camara_siempre = camara_siempre
+        self.camara_hasta = 0.0
         self.puente = None
         self.reiniciar = False
         self.t0, self.segundos = time.time(), segundos
 
     def connect(self): pass
+
+    def _on_behavior(self, name):
+        super()._on_behavior(name)
+        if name.startswith("kick"):
+            self.camara_hasta = time.time() + 15.0       # la vision sigue la pelota hasta que se para
+
+    def _send_images(self, stamp):
+        """La imagen se renderiza en OTRO hilo con una copia del estado: asi la simulacion nunca espera a la camara."""
+        if not (self.camara_siempre or self._control_step_count < 90 or time.time() < self.camara_hasta):
+            return
+        if getattr(self, "_cam_hilo", None) is None:
+            self._cam_evt, self._cam_busy = threading.Event(), False
+            self._cam_data = mujoco.MjData(self.model)
+
+            def correr():
+                camaras = sim_setup.SimCameras(self.model)          # el contexto OpenGL tiene que nacer en ESTE hilo
+                while rclpy.ok():
+                    if not self._cam_evt.wait(0.2):
+                        continue
+                    self._cam_evt.clear()
+                    self._send_frame(ipc.CAM_ANGLED, self._cam_stamp, camaras.render_angled(self._cam_data))
+                    self._cam_busy = False
+                camaras.close()
+            self._cam_hilo = threading.Thread(target=correr, daemon=True, name="camara")
+            self._cam_hilo.start()
+        if not self._cam_busy:
+            self._cam_busy, self._cam_stamp = True, stamp
+            mujoco.mj_copyData(self._cam_data, self.model, self.data)
+            self._cam_evt.set()
 
     def _send(self, tipo, cuerpo):
         if self.puente is not None:
@@ -328,7 +365,7 @@ def lanzar(caso="rayuela", *, visor=True, vision=True, control=True, ver_vision=
             editar_escena(spec)
             return spec
         mujoco.MjSpec.from_file = staticmethod(_from_file_editado)
-    mundo = Mundo(sim_worker.XML_PATH, sim_worker.POLICIES_DIR, visor, segundos=segundos)
+    mundo = Mundo(sim_worker.XML_PATH, sim_worker.POLICIES_DIR, visor, segundos=segundos, camara_siempre=ver_vision)
     if editar_escena:
         mujoco.MjSpec.from_file = staticmethod(_from_file)
     if editar_modelo:                    # ajustes sobre el mundo ya creado (p. ej. inclinar el balancin al empezar)
