@@ -36,10 +36,14 @@ afecta) → guarda (Ctrl+S) → **cierra la ventana del robot** → lánzalo otr
 
 Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 
+**Sin editar ficheros:** `MJLAB.bat` abre `mini_mjlab`, con los mismos verbos que mjlab pero en CPU:
+`MJLAB play Mini-Obstacles-MicroDuck --set NIVEL=3 --set CEREBRO=rough_walk_e` · `MJLAB list-envs` · `MJLAB params <entorno>` · `MJLAB train Mini-Kick-MicroDuck` · `MJLAB validate Mini-Obstacles-MicroDuck`.
+
 ## Qué hay aquí
 
 ```
 INSTALAR.bat / COMPROBAR.bat / RUTA.bat   doble clic: preparar el PC · comprobarlo · la ruta guiada
+MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables
 workshop-ia-fisica/   el proyecto base: robot, cerebros (.onnx), ejercicios n1-n3, librerias offline (wheels/), entrenar/
 rayuela-oficial/      la Rayuela oficial de Bravo Robots (sin modificar)

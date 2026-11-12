@@ -49,6 +49,13 @@ try:
 except Exception as e:
     check("entorno de entrenamiento de la patada", False, str(e)[:160])
 
+# politicas para terreno irregular (Hugging Face) y el circuito de obstaculos
+try:
+    import obstaculos
+    check("cerebros rough_walk_e y rough_walk_g", all(obstaculos.CEREBROS[c].exists() for c in obstaculos.CEREBROS), "faltan en windows/politicas")
+except Exception as e:
+    check("circuito de obstaculos", False, str(e)[:160])
+
 # el duelo de la cuerda: escena de dos patos (la genera el constructor oficial), motores BAM y el cerebro entrenado
 try:
     import contextlib, io

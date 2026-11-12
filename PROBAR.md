@@ -9,6 +9,10 @@ workshop-ia-fisica\.venv\Scripts\python.exe exercises_rayuela\NOMBRE.py
 (o con doble clic en `lanzar.bat NOMBRE` desde la carpeta del proyecto). **Las teclas se pulsan en la terminal**, no en la ventana del robot.
 **El ciclo de siempre:** cambia UN valor de la lista de parametros de arriba del fichero → guarda (Ctrl+S) → **cierra la ventana del robot** → lanza otra vez.
 
+> **Atajo sin editar ficheros:** `MJLAB.bat` (o `workshop-ia-fisica\.venv\Scripts\python.exe mini_mjlab.py ...`) tiene los mismos verbos que mjlab, en CPU:
+> `list-envs` (los entornos) · `params <entorno>` (qué se puede cambiar) · `play <entorno> --set NOMBRE=VALOR` · `train Mini-Kick-MicroDuck` · `validate Mini-Obstacles-MicroDuck`.
+> Ejemplo: `MJLAB play Mini-Obstacles-MicroDuck --set NIVEL=3 --set CEREBRO=rough_walk_e`.
+
 > Antes de nada: `INSTALAR_TODO.bat` (clona los repos y prepara Python 3.12 + MuJoCo + OpenCV). Si usas una carpeta de OneDrive, pausa la sincronizacion: pesa >1 GB.
 
 ## 1 · Simulacion MuJoCo (qué es y cómo se describe un mundo)
@@ -54,9 +58,12 @@ Después de `n3_05`, pon en `n4_00` → `TABLA_PROPIA = AQUI_RAIZ / "mi_tabla_pa
 | **`n4_02_patines.py`** | El Microduck sobre patines (otro cuerpo, otro cerebro) | `VOLTAJE_BATERIA`, `RETRASO_MOTORES`, `POTENCIA_MOTORES`, `ROZAMIENTO`, `CEREBRO_RODAR`, `CEREBRO_QUIETO` | Teclas: flechas, `p` empujón, `n` nueva partida. Con retraso el equilibrio se rompe |
 | **`n4_03_cuerda.py`** | **El duelo de la cuerda con una política ENTRENADA** (proyecto `patos_cuerda`): dos Microducks atados, gana quien cruza la línea contraria o hace caer al otro | `AVANCE_A/B` (cuánto tira cada uno), `FUERZA_B`, `MASA_A/B`, `ROZAMIENTO_SUELO`, `LARGO_CUERDA`, `DESPLAZAMIENTO`, `RUIDO_INICIAL`, `B_SOLO_ANDA` (B sin entrenar para el duelo), `TIEMPO_MAX` | Teclas `w/s` e `i/k` para que cada uno tire más o menos, `n` combate nuevo. Prueba `B_SOLO_ANDA = True`: ¿cuánto aporta entrenar con recompensa competitiva? |
 | **`n4_04_equilibrio.py`** | **Laboratorio de equilibrio** (sin rayuela): el Microduck de pie con su cerebro de equilibrio; tú lo empujas o le mueves el cuerpo y él se autocorrige. Mide cuánto tarda en recuperarse | `EMPUJON`, `VOLTAJE_BATERIA`, `RETRASO_MOTORES`, `POTENCIA_MOTORES`, `ROZAMIENTO`, `CEREBRO_QUIETO/ANDAR`, y `PLATAFORMA` (una tabla-balancín: `INCLINACION_MAX`, `RIGIDEZ_MUELLE`, `AMORTIGUACION`, `MASA_TABLA`) | Teclas: `p` empujón, `b` modo postura (flechas = altura e inclinación del cuerpo), `n` nueva prueba. Medido: con `EMPUJON = 0.4` se recupera siempre; con 0.8 falla a veces. ¿Qué pasa con `RETRASO_MOTORES = 2`? |
+| **`n4_05_obstaculos.py`** | **El circuito de obstáculos** (inspirado en la demo de NVIDIA del GTC Berlín 2026): el pato anda solo por rampa, escalones, cuadrícula irregular y escombros, y avisa de la sección, de dónde se cae y de la meta | `NIVEL` (0 llano … 4 todo: es el **crescendo**), `CEREBRO` (`alpha_walking`, `rough_walk_e`, `rough_walk_g`), `AVANCE_AUTOMATICO`, `MANTENER_RUMBO`, `ANGULO_RAMPA`, `N_ESCALONES`, `ALTURA_ESCALON`, `ALTURA_CUADRICULA`, `ALTURA_ESCOMBROS`, `SEMILLA_CIRCUITO` | Sube `NIVEL` de 0 a 4: ¿en cuál se cae cada cerebro? Sube `ALTURA_ESCALON` a 0.02 |
+| **`n4_06_validar_politicas.py`** | **Validar con números**, como la validación de NVIDIA: cada cerebro en cada nivel, con circuitos completados y caídas; guarda un CSV | `PRUEBAS`, `CEREBROS`, `NIVELES`, `AVANCE`, `MANTENER_RUMBO` y las alturas del circuito | Medido aquí (6 pruebas, ruido alto): los tres completan llano y rampa; en escalones, cuadrícula y escombros se separan |
 
 ## Lo que está probado y lo que no
 
+- **Descargado de Hugging Face (Apache-2.0):** `rough_walk_e` y `rough_walk_g` (en `windows/politicas/`, con su procedencia).
 - **Probado sin ventana (arranca y se comporta):** `n4_00` (patada → visión → control → llega a la casilla), `n4_01`, `n1_02`, `n3_05` (entrena y mejora), `n4_03` (cuerda tensa, patos de pie), `n4_04` (empujones medidos, con y sin plataforma), `n4_02` (arranca).
 - **Sin probar con ventana abierta ni con teclado real:** ninguno. Lo primero que conviene mirar: que el visor se abra, que las teclas respondan y que la fluidez sea aceptable (la Rayuela con cámara va por debajo del tiempo real en este PC: unos 19 pasos/s de simulación frente a 50).
 - **`n4_02_patines`:** la tecla `n` (nueva partida) está escrita pero no probada.
