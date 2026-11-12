@@ -29,7 +29,7 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 | 5 · Cómo se le puntúa | La recompensa como suma de piezas × pesos | Diseñar la recompensa es lo difícil |
 | 6 · Entrenar | PPO de verdad, ~2 min: de ~1 a ~6 aciertos de 9 | El bucle completo del RL |
 | 7 · El resultado | La partida de la rayuela con **tu** política | Simulación + cerebro + visión + control |
-| Casos de uso | Patines · cuerda · balancín · ROS 2 en vivo · tu propia escena | Lo mismo con otros cuerpos y otros mundos |
+| Casos de uso | Patines · duelo de la cuerda · equilibrio · ROS 2 en vivo · tu propia escena | Lo mismo con otros cuerpos y otros mundos |
 
 **El ciclo de trabajo de todo el taller:** abre el ejercicio → cambia UN parámetro (están arriba, con comentarios que dicen en qué
 afecta) → guarda (Ctrl+S) → **cierra la ventana del robot** → lánzalo otra vez y observa.

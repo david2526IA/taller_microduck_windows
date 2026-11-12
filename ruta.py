@@ -62,7 +62,7 @@ PASOS = [
 EXTRAS = [
     ("a", "Patines: otro cuerpo y otro cerebro", EJ / "n4_02_patines.py"),
     ("b", "La cuerda: dos patos tirando", EJ / "n4_03_cuerda.py"),
-    ("c", "El balancin: equilibrio sobre una tabla que se mueve", EJ / "n4_04_balancin.py"),
+    ("c", "El equilibrio: tu lo empujas y el se autocorrige", EJ / "n4_04_equilibrio.py"),
     ("d", "ROS 2 en vivo: nodos y topics", EJ / "n4_01_ros2_en_vivo.py"),
     ("e", "Tu propia escena: gravedad, rozamiento, obstaculos", EJ / "n1_02_tu_escena.py"),
 ]
