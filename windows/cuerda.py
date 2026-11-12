@@ -76,7 +76,7 @@ def lanzar_cuerda(fuerza_a=0.15, fuerza_b=0.15, escala_masa_a=1.0, escala_masa_b
     for i in (0, 1):
         body = next(b for b in spec.bodies if b.name == f"duck{i}_trunk_base")
         body.add_site(name=f"cuerda_{i}", pos=[-0.05, 0, 0], size=[0.012] * 3, rgba=[1, 0, 0, 1])
-    cuerda = spec.add_tendon(name="tug_rope", limited=True, range=[0.0, largo_cuerda], width=0.006, rgba=[0.9, 0.7, 0.2, 1])
+    cuerda = spec.add_tendon(name="tug_rope", limited=True, range=[0.0, largo_cuerda], width=0.006, rgba=[0.9, 0.7, 0.2, 0.0])   # el tendon hace la fisica; el dibujo de la cuerda va aparte
     if rigidez_cuerda > 0:
         cuerda.stiffness = rigidez_cuerda
     cuerda.wrap_site("cuerda_0")
@@ -124,6 +124,7 @@ def lanzar_cuerda(fuerza_a=0.15, fuerza_b=0.15, escala_masa_a=1.0, escala_masa_b
     def pos_x(i):
         return float(data.xpos[ducks[i].trunk_base_id][0])
 
+    s_a, s_b = model.site("cuerda_0").id, model.site("cuerda_1").id
     visor_ctx = mujoco.viewer.launch_passive(model, data) if visor else None
     t0, paso, ultimo = time.time(), 0, 0
     try:
@@ -133,6 +134,11 @@ def lanzar_cuerda(fuerza_a=0.15, fuerza_b=0.15, escala_masa_a=1.0, escala_masa_b
                 paso_control()
             mujoco.mj_step(model, data)
             if visor_ctx:
+                # La cuerda se dibuja aparte, siempre recta entre los dos sitios (el dibujo del tendon en el visor sale torcido)
+                g = visor_ctx.user_scn.geoms[0]
+                mujoco.mjv_connector(g, mujoco.mjtGeom.mjGEOM_CAPSULE, 0.006, data.site_xpos[s_a], data.site_xpos[s_b])
+                g.rgba[:] = [0.9, 0.7, 0.2, 1]
+                visor_ctx.user_scn.ngeom = 1
                 visor_ctx.sync()
             paso += 1
             while kb and not kb.cola.empty():
