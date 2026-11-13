@@ -21,7 +21,8 @@ workshop-ia-fisica\.venv\Scripts\python.exe exercises_rayuela\NOMBRE.py
 |---|---|---|---|
 | `workshop-ia-fisica\exercises\n1_00_ver_robot.py` | El robot en el visor | `POSE` (STAND/SIT/FOLD) | Ctrl + clic derecho lo empuja |
 | `workshop-ia-fisica\exercises\n1_01_ver_pieza.py` | Una pieza 3D suelta | `PIEZA` | Que el robot son mallas + masas + motores |
-| **`n1_02_tu_escena.py`** | La rayuela en un mundo que TÚ editas | `GRAVEDAD` (Luna=1.62), `ROZAMIENTO_SUELO` (hielo=0.1), `ESCALA_MASA_PATO`, `RADIO_PELOTA`, `MASA_PELOTA`, `OBSTACULOS` (cajas), `COLOR_TABLERO` | El cerebro se entrenó en la Tierra: en la Luna o con hielo se nota. ¿Sigue detectando la pelota la visión con un tablero oscuro? |
+| **`n1_02_tu_escena.py`** | **Laboratorio de mundos:** la rayuela en un mundo que TÚ editas | `MUNDO` (tierra, luna, marte, hielo, desierto, noche), `GRAVEDAD`, `ROZAMIENTO_SUELO`, `COLOR_SUELO_1/2`, `COLOR_CIELO_ARRIBA/ABAJO`, `ESCALA_MASA_PATO`, `RADIO_PELOTA`, `MASA_PELOTA`, `OBJETOS` (caja, rampa, esfera, cilindro), `COLOR_TABLERO` | El cerebro se entrenó en la Tierra: en la Luna o sobre hielo se nota. ¿Sigue detectando la pelota la visión con un suelo oscuro? Reto: un laberinto de cajas hasta la casilla 9. |
+| **`n5_01_generalizar.py`** | **Generalizar:** tres políticas de ejemplo probadas en 6 mundos distintos | `POLITICAS`, `MUNDOS_PRUEBA` | Una entrenada en un solo mundo acierta 8/9 y se hunde al cambiar el mundo (4,2 de media); aleatorizar a ciegas empeora (2,0); la que percibe el mundo aguanta (6,8). Entrena las tuyas con `ALEATORIZAR` y `VE_EL_MUNDO` en `n3_05` |
 
 ## 2 · Fundamentos de RL (agente, entorno, observaciones, acciones, recompensas, PPO)
 

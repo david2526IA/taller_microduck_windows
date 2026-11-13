@@ -6,7 +6,7 @@ Tres presentaciones PowerPoint (.pptx, con su PDF) que se reproducen en cualquie
 |---|---|---|
 | `Presentacion_01_teoria_didactica.pptx` | La principal: laboratorio primero, luego gemelo digital y cerebro; con más teoría y más imágenes | 56 |
 | `Presentacion_02_guia_practica.pptx` | Versión corta y práctica, con más referencias a los ejercicios | 20 |
-| **`Presentacion_03_taller_completo.pptx`** | **La del taller de Upskilling Week:** simulación, fundamentos de RL, práctica con mjlab y PPO, ROS 2 y la partida de la rayuela, y los casos de uso (patines, cuerda, balancín). Reutiliza diapositivas de la 01 y añade 18 nuevas. Va con la ruta guiada `RUTA.bat` | 49 |
+| **`Presentacion_03_taller_completo.pptx`** | **La del taller de Upskilling Week:** simulación, fundamentos de RL, práctica con mjlab y PPO, ROS 2 y la partida de la rayuela, y los casos de uso (patines, cuerda, balancín). Reutiliza diapositivas de la 01 y añade nuevas. Va con `PROGRAMA.md` | 50 |
 
 Cada diapositiva lleva sus **notas del ponente** (en PowerPoint: Vista → Notas).
 

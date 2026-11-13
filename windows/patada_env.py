@@ -49,13 +49,22 @@ class PatadaEnv:
         m = self.w.model
         m.opt.gravity[2] = -abs(gravedad)
         self.ball_body = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "ball")
-        if masa_pelota is not None:
-            m.body_mass[self.ball_body] = masa_pelota
-        if rozamiento_pelota is not None and m.npair:
-            m.pair_friction[:, :2] = rozamiento_pelota
+        self.ball_geom = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, "ball_geom")
+        self.base_masa = float(m.body_mass[self.ball_body])                      # los del modelo, para set_mundo(None)
+        self.base_roz = m.geom_friction[self.ball_geom].copy()                   # (deslizamiento, giro, rodadura) de la pelota
+        self.set_mundo(gravedad, masa_pelota, rozamiento_pelota)
         self.snap = (self.w.data.qpos.copy(), self.w.data.qvel.copy())
         self.espera = segundos_tras_patada
         self.asentar = segundos_asentar
+
+    def set_mundo(self, gravedad=9.81, masa_pelota=None, rozamiento_pelota=None):
+        """Cambia el mundo entre patada y patada (lo que hace la ALEATORIZACION DE DOMINIO: entrenar en mundos distintos).
+        masa_pelota / rozamiento_pelota None = los del modelo."""
+        m = self.w.model
+        m.opt.gravity[2] = -abs(gravedad)
+        m.body_mass[self.ball_body] = self.base_masa if masa_pelota is None else masa_pelota
+        factor = 1.0 if rozamiento_pelota is None else rozamiento_pelota / self.base_roz[0]
+        m.geom_friction[self.ball_geom] = self.base_roz * factor                 # rozamiento de la pelota (el del modelo es 0.5)
 
     def reset(self):
         import contextlib, io

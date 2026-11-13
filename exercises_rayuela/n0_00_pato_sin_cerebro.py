@@ -1,4 +1,4 @@
-"""PASO 2 DE LA RUTA - EL PATO SIN CEREBRO: mira como se cae.
+"""BLOQUE 1 - EL PATO SIN CEREBRO: mira como se cae.
 
 Le damos al Microduck la postura de pie y le ordenamos "mantenla" con un control simple (PD), sin inteligencia
 artificial. Parece suficiente... y no lo es: en menos de un segundo se cae. Un robot con dos patas es como un lapiz

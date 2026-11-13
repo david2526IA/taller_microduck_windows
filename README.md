@@ -15,27 +15,25 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
    Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
 3. Instala: `.\INSTALAR.bat` (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
    Debe terminar en **TODO LISTO**.
-4. Ejecuta **`.\RUTA.bat`** (o doble clic desde el Explorador de Windows): la ruta guiada te lleva paso a paso.
+4. Abre **[`PROGRAMA.md`](PROGRAMA.md)**: es el orden del taller, bloque a bloque, con el archivo que toca en cada momento.
 
-> En el explorador de VS Code, el doble clic **abre** el archivo para editarlo, no lo ejecuta. Para ejecutar un `.bat`,
-> hazlo desde el Explorador de Windows o escribe `.\INSTALAR.bat` en la terminal de VS Code.
+> En el explorador de VS Code, el doble clic **abre** el archivo para editarlo, no lo ejecuta. Los `.bat` se ejecutan desde el
+> Explorador de Windows, o escribiendo `.\INSTALAR.bat` en la terminal de VS Code.
 
-## La ruta guiada (`RUTA.bat`)
+## Cómo se trabaja: un archivo, una cosa que cambiar, un efecto que ver
 
-| Paso | Qué ves | Qué se aprende |
+| Bloque | Qué cambias | Qué ves |
 |---|---|---|
-| 1 · Tu entorno | `TODO LISTO` y el robot en el visor | Entorno virtual, versiones fijas, MuJoCo |
-| 2 · El pato sin cerebro | Se cae en menos de 1 s | Equilibrar no se resuelve con una postura fija |
-| 3 · Meterle IA | Anda, se sienta, rueda, se recupera de empujones | El cerebro es una función: sentidos → órdenes |
-| 4 · Dentro del cerebro | 61 entradas y 14 salidas en vivo | Observación → cerebro → acción |
-| 5 · Cómo se le puntúa | La recompensa como suma de piezas × pesos | Diseñar la recompensa es lo difícil |
-| 6 · Entrenar | PPO de verdad, ~3 min: de ~1 a ~8 aciertos de 9 | El bucle completo del RL |
-| 7 · El resultado | La partida de la rayuela con **tu** política | Simulación + cerebro + visión + control |
-| 8 · Sim-to-real | Contrato del .onnx y robustez en crescendo (`n5_00`) | Cómo se prepara una política antes del robot real |
-| Casos de uso | Patines · duelo de la cuerda · equilibrio · ROS 2 en vivo · tu propia escena | Lo mismo con otros cuerpos y otros mundos |
+| 1 · El robot en el simulador | La postura, la fricción, la masa | Un pato sin IA que se cae en menos de 1 s |
+| 2 · Laboratorio de mundos | Gravedad, colores, suelo, objetos, circuito de obstáculos | El mismo robot en la Luna, sobre hielo, en un laberinto |
+| 3 · El cerebro | Sentidos, ruido, pesos de la recompensa | Qué es una política y qué necesita para decidir |
+| 4 · Entrenar | Recompensa, exploración, tasa de aprendizaje | PPO real en tu PC: de ~1 a ~8 aciertos de 9 |
+| 5 · ROS 2 y la partida | Tu política, el objetivo | La partida de la rayuela con **tu** política |
+| 6 · Generalizar | Cuánto varía el mundo al entrenar | Una política que aguanta mundos que no ha visto |
+| Casos de uso | Patines, cuerda, equilibrio | Lo mismo con otros cuerpos y otros mundos |
 
-**El ciclo de trabajo de todo el taller:** abre el ejercicio → cambia UN parámetro (están arriba, con comentarios que dicen en qué
-afecta) → guarda (Ctrl+S) → **cierra la ventana del robot** → lánzalo otra vez y observa.
+**El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
+→ guarda (Ctrl+S) → **cierra la ventana del robot** → `F5` y observa.
 
 **Las diapositivas del taller** están en el repositorio: `workshop-ia-fisica/presentaciones/Presentacion_03_taller_completo.pptx` (y su `.pdf`). Cada diapositiva lleva notas del ponente.
 
@@ -47,7 +45,8 @@ Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 ## Qué hay aquí
 
 ```
-INSTALAR.bat / COMPROBAR.bat / RUTA.bat   doble clic: preparar el PC · comprobarlo · la ruta guiada
+PROGRAMA.md                                el orden del taller (5 h), bloque a bloque
+INSTALAR.bat / COMPROBAR.bat               preparar el PC · comprobar que todo funciona
 MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables
 workshop-ia-fisica/   el proyecto base: robot, cerebros (.onnx), ejercicios n1-n3, librerias offline (wheels/), entrenar/

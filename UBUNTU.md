@@ -1,6 +1,6 @@
 # Si llevas Ubuntu (y, opcionalmente, una GPU NVIDIA)
 
-El taller está pensado para **Windows sin GPU** (`INSTALAR.bat`, `RUTA.bat`, `MJLAB.bat`). Si llevas **Ubuntu 22.04**, tienes dos caminos que ya existen en este repositorio.
+El taller está pensado para **Windows sin GPU** (`INSTALAR.bat`, `MJLAB.bat`). Si llevas **Ubuntu 22.04**, tienes dos caminos que ya existen en este repositorio.
 Importante: ninguno de los dos se ha probado en esta máquina (es Windows); vienen del trabajo de Bravo Robots en Linux y de sus instrucciones oficiales.
 
 ## 1 · Los ejercicios del taller (sin GPU)

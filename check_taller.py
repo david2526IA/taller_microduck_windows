@@ -46,8 +46,28 @@ try:
         env = patada_env.PatadaEnv()
         x, y, casilla, cayo = env.step(0.9, "kick_right")
     check(f"una patada simulada: la pelota llega a x={x:.2f} m ({time.time() - t:.0f} s)", x > 0.5 and not cayo)
+    with contextlib.redirect_stdout(io.StringIO()):           # el mundo cambia de verdad: en la Luna la pelota llega mas lejos
+        env.set_mundo(1.62)
+        x_luna = env.step(0.9, "kick_right")[0]
+    check(f"mundos distintos (Luna: la misma patada llega a x={x_luna:.2f} m)", x_luna > x + 0.5)
 except Exception as e:
     check("entorno de entrenamiento de la patada", False, str(e)[:160])
+
+# el laboratorio de mundos (n1_02): todos los mundos predefinidos y los cuatro tipos de objeto compilan
+try:
+    import importlib.util
+    s = importlib.util.spec_from_file_location("n1_02", RAIZ / "exercises_rayuela" / "n1_02_tu_escena.py")
+    lab = importlib.util.module_from_spec(s)
+    s.loader.exec_module(lab)
+    lab.OBJETOS = [dict(tipo="caja"), dict(tipo="rampa", angulo=8), dict(tipo="esfera", tam=(0.04,), fijo=False), dict(tipo="cilindro", tam=(0.03, 0.1))]
+    for mundo in lab.MUNDOS:
+        lab.MUNDO = mundo
+        sp = mujoco.MjSpec.from_file(str(ofi / "src/mjlab_microduck/robot/microduck/scene.xml"))
+        lab.editar_escena(sp)
+        sp.compile()
+    check(f"laboratorio de mundos ({len(lab.MUNDOS)} mundos y 4 tipos de objeto)", True)
+except Exception as e:
+    check("laboratorio de mundos (n1_02)", False, str(e)[:160])
 
 # politicas para terreno irregular (Hugging Face) y el circuito de obstaculos
 try:

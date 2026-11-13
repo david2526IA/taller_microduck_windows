@@ -1,0 +1,70 @@
+{
+  "1": {
+    "pie": "kick_right",
+    "velocidad": 0.25
+  },
+  "2": {
+    "pie": "kick_left",
+    "velocidad": 0.295
+  },
+  "3": {
+    "pie": "kick_right",
+    "velocidad": 0.422
+  },
+  "4": {
+    "pie": "kick_right",
+    "velocidad": 0.507
+  },
+  "5": {
+    "pie": "kick_left",
+    "velocidad": 0.61
+  },
+  "6": {
+    "pie": "kick_right",
+    "velocidad": 0.729
+  },
+  "7": {
+    "pie": "kick_left",
+    "velocidad": 0.826
+  },
+  "8": {
+    "pie": "kick_left",
+    "velocidad": 0.924
+  },
+  "9": {
+    "pie": "kick_right",
+    "velocidad": 1.04
+  },
+  "_meta": {
+    "nombre": "un_solo_mundo",
+    "aciertos": 8,
+    "iteraciones": 60,
+    "patadas_por_ronda": 12,
+    "learning_rate": 0.012,
+    "exploracion": 0.25,
+    "semilla": 0,
+    "casillas_entrenadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "recompensa": {
+      "precision": 2.0,
+      "acierto": 1.0,
+      "caida": 3.0,
+      "fuerza": 0.0
+    },
+    "mundo": {
+      "gravedad": 9.81,
+      "masa_pelota": null,
+      "rozamiento_pelota": null,
+      "aleatorizar": 0.0
+    }
+  }
+}

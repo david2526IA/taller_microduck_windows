@@ -49,7 +49,17 @@ SEMILLA = 0                 # AFECTA A: la suerte. Cambiala y repite: ¿sale igu
 CASILLAS = [1, 2, 3, 4, 5, 6, 7, 8, 9]   # AFECTA A: que objetivos ve al entrenar. Prueba solo [3, 7]: ¿generaliza a las demas?
 GRAVEDAD = 9.81             # AFECTA A: la fisica del mundo. 1.62 = Luna: la pelota vuela mucho mas lejos.
 MASA_PELOTA = None          # AFECTA A: una pelota mas pesada llega menos lejos. Prueba 0.2 (None = la del modelo).
-ROZAMIENTO_PELOTA = None    # AFECTA A: cuanto rueda tras caer. Prueba 0.05 (hielo) o 1.0.
+ROZAMIENTO_PELOTA = None    # AFECTA A: cuanto rueda tras caer. El del modelo es 0.5: con 0.25 rueda el doble, con 1.0 se queda corta.
+
+# ---------- 4. GENERALIZAR: entrenar en mundos distintos (aleatorizacion de dominio) ----------
+ALEATORIZAR = 0.0           # AFECTA A: 0 = siempre el MISMO mundo. 0.3 = en CADA patada la gravedad, la masa y el rozamiento de la
+                            #           pelota cambian al azar hasta un 30 %. Una politica entrenada en un solo mundo acierta ahi...
+                            #           y falla si el mundo cambia un poco. Medido: a ciegas empeora; hace falta VE_EL_MUNDO = True
+                            #           (y 150 rondas) para que aguante. Compruebalo con n5_01_generalizar.py.
+VE_EL_MUNDO = False         # AFECTA A: si la politica PERCIBE como es el mundo (gravedad, masa y rozamiento de la pelota) ademas de la casilla.
+                            #           Con ALEATORIZAR > 0 y VE_EL_MUNDO = False entrena "a ciegas": solo aprende un promedio y falla
+                            #           en todos los mundos. Con VE_EL_MUNDO = True aprende a ADAPTARSE a lo que percibe.
+                            #           (En el robot real seria una estimacion: sensores, o el historial de lo que acaba de pasar.)
 
 # Nombre con el que se guarda TU politica en la carpeta mis_politicas/. Cambialo para entrenar VARIAS y compararlas
 # (n3_06_comparar_politicas.py): p. ej. "precisa" con PESO_FUERZA = 0, y "ahorradora" con PESO_FUERZA = 0.5.
@@ -65,17 +75,20 @@ PIES = ("kick_left", "kick_right")
 VEL_MIN, VEL_MAX = 0.25, 1.8      # rango de velocidades que admite el cerebro de patada
 
 
-def observacion(casilla):
+def observacion(casilla, ctx=(0.0, 0.0, 0.0), ve_mundo=None):
+    """Lo que ve la politica: donde esta la casilla y, si VE_EL_MUNDO, como es el mundo (ctx = gravedad, masa, rozamiento: 0 = normal)."""
     cx, cy = board_geometry.casilla_center(casilla)
+    if VE_EL_MUNDO if ve_mundo is None else ve_mundo:
+        return np.array([cx / 2.0, cy / 0.5, *ctx])
     return np.array([cx / 2.0, cy / 0.5])
 
 
 class Politica:
-    """Una red neuronal minima: observacion (2) -> 16 neuronas -> [velocidad media, logit del pie]. Es EL CEREBRO que se entrena."""
+    """Una red neuronal minima: observacion (2 o 5) -> 16 neuronas -> [velocidad media, logit del pie]. Es EL CEREBRO que se entrena."""
 
-    def __init__(self, rng, exploracion):
+    def __init__(self, rng, exploracion, entradas=2):
         H = 16
-        self.p = {"W1": rng.normal(0, 0.3, (H, 2)), "b1": np.zeros(H),
+        self.p = {"W1": rng.normal(0, 0.3, (H, entradas)), "b1": np.zeros(H),
                   "W2": rng.normal(0, 0.05, (2, H)), "b2": np.zeros(2),
                   "logstd": np.array([np.log(exploracion)])}
         self.m = {k: np.zeros_like(v) for k, v in self.p.items()}      # memoria de Adam
@@ -162,7 +175,7 @@ def main():
     rng = np.random.default_rng(SEMILLA)
     print("Cargando el simulador (unos segundos)...")
     env = patada_env.PatadaEnv(GRAVEDAD, MASA_PELOTA, ROZAMIENTO_PELOTA)
-    pol = Politica(rng, EXPLORACION)
+    pol = Politica(rng, EXPLORACION, entradas=5 if VE_EL_MUNDO else 2)
     evaluar(env, pol, "ANTES de entrenar (politica sin aprender)")
 
     base = {c: 0.0 for c in CASILLAS}           # "lo que se espera sacar" en cada casilla: sirve para ver si una patada fue mejor o peor
@@ -172,7 +185,13 @@ def main():
         datos, recs, hits = [], [], 0
         for _ in range(PATADAS_POR_RONDA):
             c = int(rng.choice(CASILLAS))
-            x = observacion(c)
+            ctx = (0.0, 0.0, 0.0)
+            if ALEATORIZAR > 0:                 # un mundo nuevo para cada patada: asi la politica no puede "memorizar" uno
+                a = ALEATORIZAR
+                fg, fm, fr = (rng.uniform(1 - a, 1 + a) for _ in range(3))
+                env.set_mundo(GRAVEDAD * fg, env.base_masa * fm, float(env.base_roz[0]) * fr)
+                ctx = ((fg - 1) / a, (fm - 1) / a, (fr - 1) / a)         # lo que "percibe" la politica (entre -1 y 1)
+            x = observacion(c, ctx)
             v, pie = pol.actuar(x, rng)
             res = env.step(float(np.clip(v, VEL_MIN, VEL_MAX)), PIES[pie])
             r, _ = recompensa(c, res, float(np.clip(v, VEL_MIN, VEL_MAX)))
@@ -189,12 +208,16 @@ def main():
         barra = "#" * int(max(0, (media + 4) * 6))
         print(f"  {it:3d}  |      {media:+6.2f}      |  {hits:2d}/{PATADAS_POR_RONDA}   |    {np.exp(pol.p['logstd'][0]):.2f}     | {barra}", flush=True)
     print(f"\nEntrenamiento terminado en {time.time() - t0:.0f} s.")
+    env.set_mundo(GRAVEDAD, MASA_PELOTA, ROZAMIENTO_PELOTA)                       # la prueba final, en el mundo normal
     aciertos, tabla = evaluar(env, pol, "DESPUES de entrenar")
     ARCHIVO_TABLA.parent.mkdir(exist_ok=True)
     tabla["_meta"] = dict(nombre=NOMBRE_POLITICA, aciertos=int(aciertos), iteraciones=ITERACIONES, patadas_por_ronda=PATADAS_POR_RONDA,
                           learning_rate=LEARNING_RATE, exploracion=EXPLORACION, semilla=SEMILLA, casillas_entrenadas=CASILLAS,
                           recompensa=dict(precision=PESO_PRECISION, acierto=BONUS_ACIERTO, caida=PENALIZA_CAIDA, fuerza=PESO_FUERZA),
-                          mundo=dict(gravedad=GRAVEDAD, masa_pelota=MASA_PELOTA, rozamiento_pelota=ROZAMIENTO_PELOTA))
+                          mundo=dict(gravedad=GRAVEDAD, masa_pelota=MASA_PELOTA, rozamiento_pelota=ROZAMIENTO_PELOTA, aleatorizar=ALEATORIZAR,
+                                     ve_el_mundo=VE_EL_MUNDO))
+    if VE_EL_MUNDO:                                      # esta politica necesita su red (no basta una tabla): se guarda entera
+        tabla["_red"] = {k: np.asarray(v).tolist() for k, v in pol.p.items()}
     ARCHIVO_TABLA.write_text(json.dumps(tabla, indent=2), encoding="utf-8")
     print(f"\nGuardado: {ARCHIVO_TABLA.name}. Para jugar con TU politica: n4_00_partida_rayuela.py -> TABLA_PROPIA.")
     print("Ahora cambia UN parametro de arriba y compara: ¿que cambia en la curva y en los aciertos?")
