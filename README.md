@@ -39,7 +39,7 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
 | **3 · Entrenar** | El checkpoint; la recompensa y el PPO de la patada; los pesos de un entrenamiento real | Nueve momentos reales de un entrenamiento; entrenas tú en CPU; tu paquete listo para una GPU |
 | **4 · Desplegar** | Tu política, el objetivo; cuánto varía el mundo al entrenar | La partida de la rayuela con **tu** política; una política que aguanta mundos que no ha visto |
 
-**El camino esencial:** hay más ejercicios de los que caben en 5 horas. En [`PROGRAMA.md`](PROGRAMA.md) están marcados con ⭐ los **12 imprescindibles**; el resto (➕) es para quien vaya sobrado o para casa.
+**El camino esencial:** hay más ejercicios de los que caben en 5 horas. En [`PROGRAMA.md`](PROGRAMA.md) están marcados como **Esencial** los 12 imprescindibles; el resto (**Extra**) es para quien avance más rápido o para casa.
 **Tu cuaderno:** [`CUADERNO.md`](CUADERNO.md) es una página para **predecir antes de cambiar** y apuntar lo que aprendes.
 
 **El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
