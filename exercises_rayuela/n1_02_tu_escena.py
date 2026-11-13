@@ -113,13 +113,13 @@ def editar_escena(spec):
             t.rgb1 = list(_valor(COLOR_SUELO_1, MUNDO, 2, t.rgb1))
             t.rgb2 = list(_valor(COLOR_SUELO_2, MUNDO, 3, t.rgb2))
     for g in spec.geoms:
-        if g.name == "floor":
-            g.friction[0] = roz                                                               # <geom name="floor" friction=...>
-            g.priority = 1                                                                    # que mande el suelo, no el pie
+        if g.name in ("floor", "board_plate", "left_foot_collision", "right_foot_collision"):
+            g.friction[0] = roz                                                               # <geom friction=...>: el suelo, el tablero y los pies
         if g.name == "board_plate":
             g.rgba = [*COLOR_TABLERO, 1]                                                      # color del tablero
         if g.name == "ball_geom":
             g.size[0] = RADIO_PELOTA                                                          # radio de la pelota
+            g.friction[0] = 0.5 * roz                                                         # la pelota (0.5 es su valor normal)
             if MASA_PELOTA is not None:
                 g.mass = MASA_PELOTA
     for b in spec.bodies:

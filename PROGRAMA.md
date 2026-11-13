@@ -19,23 +19,24 @@ Cada bloque es una parte de ese camino. **Entender cada etapa** importa porque, 
 Los archivos están en dos carpetas: `workshop-ia-fisica/exercises/` (la serie base, `n1` a `n3`) y `exercises_rayuela/` (el resto).
 Las diapositivas: `workshop-ia-fisica/presentaciones/Presentacion_03_taller_completo.pptx` (y `.pdf`). Si una palabra no la conoces: [`GLOSARIO.md`](GLOSARIO.md).
 
-## Los 12 ejercicios esenciales
+## Los 13 ejercicios esenciales
 Hay más ejercicios de los que caben en cinco horas. En cada bloque están marcados como **Esencial** los que cubren los cuatro puntos de la descripción oficial (MuJoCo y escenas propias, RL y PPO, recompensa y entrenamiento corto, ROS 2 y ONNX jugando a la rayuela). Los marcados como **Extra** son para quien avance más rápido o para hacer en casa.
 
 | # | Bloque | Ejercicio esencial | Te llevas |
 |---|---|---|---|
-| 1 | 1.1 Modelar el robot | `n0_00` el pato sin cerebro | Sin cerebro se cae en menos de 1 s, y ni la fricción ni la masa lo salvan |
-| 2 | 1.2 El mundo | `n1_02` laboratorio de mundos | El mundo es parte del problema: Luna, hielo, objetos |
-| 3 | 2 Entorno y RL | `n3_00` con cerebro | El mismo robot con IA anda y se recupera de empujones |
-| 4 | 2 Entorno y RL | `n2_03` dentro del cerebro | Una política es una función: 61 números entran, 14 salen |
-| 5 | 2 Entorno y RL | `n2_01` la recompensa en vivo | La recompensa es una nota: suma de piezas × pesos |
-| 6 | 3.1 Entrenar | `n3_07` voltereta, checkpoint a checkpoint | Un entrenamiento tiene fases: no sabe, aparece, se vuelve irregular, se estabiliza |
-| 7 | 3.1 Entrenar | `n3_08` medir la voltereta | Se mide y se elige: el último checkpoint no siempre es el mejor |
-| 8 | 3.1 Entrenar | `n3_05` entrena la patada (PPO, ~3 min) | Entrenas tú, de verdad, en tu CPU |
-| 9 | 3.2 Configurarlo | `n6_00` configura tu entrenamiento real | Tu paquete listo para una GPU; sabes qué botón tocar |
-| 10 | 4.1 Desplegar | `n4_01` ROS 2 en vivo | Nodos y topics: cómo se conectan visión, control y teleoperación |
-| 11 | 4.1 Desplegar | `n4_00` la partida de la rayuela | Tu política jugando con visión, control y marcador |
-| 12 | 4.2 Sim-to-real | `n5_01` generalizar | Aleatorizar no basta: la política tiene que percibir lo que cambia |
+| 1 | 1.1 Modelar el robot | `n1_03` el despiece (y leer el XML) | De qué piezas está hecho el pato y cómo se montan en un árbol |
+| 2 | 1.1 Modelar el robot | `n0_00` el pato sin cerebro | Sin cerebro se cae en menos de 1 s, y ni la fricción ni la masa lo salvan |
+| 3 | 1.2 El mundo | `n1_02` laboratorio de mundos | El mundo es parte del problema: Luna, hielo, objetos |
+| 4 | 2 Entorno y RL | `n3_00` con cerebro | El mismo robot con IA anda y se recupera de empujones |
+| 5 | 2 Entorno y RL | `n2_03` dentro del cerebro | Una política es una función: 61 números entran, 14 salen |
+| 6 | 2 Entorno y RL | `n2_01` la recompensa en vivo | La recompensa es una nota: suma de piezas × pesos |
+| 7 | 3.1 Entrenar | `n3_07` voltereta, checkpoint a checkpoint | Un entrenamiento tiene fases: no sabe, aparece, se vuelve irregular, se estabiliza |
+| 8 | 3.1 Entrenar | `n3_08` medir la voltereta | Se mide y se elige: el último checkpoint no siempre es el mejor |
+| 9 | 3.1 Entrenar | `n3_05` entrena la patada (PPO, ~3 min) | Entrenas tú, de verdad, en tu CPU |
+| 10 | 3.2 Configurarlo | `n6_00` configura tu entrenamiento real | Tu paquete listo para una GPU; sabes qué botón tocar |
+| 11 | 4.1 Desplegar | `n4_01` ROS 2 en vivo | Nodos y topics: cómo se conectan visión, control y teleoperación |
+| 12 | 4.1 Desplegar | `n4_00` la partida de la rayuela | Tu política jugando con visión, control y marcador |
+| 13 | 4.2 Sim-to-real | `n5_01` generalizar | Aleatorizar no basta: la política tiene que percibir lo que cambia |
 
 ## El mapa de horas
 
@@ -75,9 +76,12 @@ Hay más ejercicios de los que caben en cinco horas. En cada bloque están marca
 
 | Nivel | Archivo | Qué cambias | Qué ves |
 |---|---|---|---|
+| Esencial | `workshop-ia-fisica/exercises/n1_03_despiece.py` | `COLUMNAS`, `PIEZAS`, `NORMALIZAR` | Las 43 piezas 3D (STL) que forman al pato, sueltas y en cuadrícula |
 | Esencial | `exercises_rayuela/n0_00_pato_sin_cerebro.py` | `FRICCION`, `FACTOR_MASA`, `EMPUJON`, `VELOCIDAD` | El pato sin IA se cae en menos de 1 s, hagas lo que hagas |
 | Extra | `workshop-ia-fisica/exercises/n1_00_ver_robot.py` | `POSE` (STAND, SIT, FOLD) | El robot en distintas posturas; empújalo con Ctrl + clic derecho |
 | Extra | `workshop-ia-fisica/exercises/n1_01_ver_pieza.py` | `PIEZA` | Cada pieza 3D del robot |
+
+**Para leer en VS Code (sin ejecutar):** [`workshop-ia-fisica/robot/GUIA_DE_LECTURA.md`](workshop-ia-fisica/robot/GUIA_DE_LECTURA.md) te guía por `robot_groundcontact.xml` (el robot en XML) y `scene.xml` (la escena), con los números de línea.
 
 **Te llevas:** un robot es un árbol de piezas con masa; y equilibrar no se arregla con una postura fija: hace falta un cerebro que reaccione.
 

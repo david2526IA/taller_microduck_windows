@@ -65,6 +65,18 @@ try:
         sp = mujoco.MjSpec.from_file(str(ofi / "src/mjlab_microduck/robot/microduck/scene.xml"))
         lab.editar_escena(sp)
         sp.compile()
+    # en el mundo NORMAL el ejercicio no debe cambiar la fisica (un ajuste mal puesto hacia que la pelota se pasara de la casilla)
+    lab.MUNDO, lab.OBJETOS = None, []
+    escena = str(ofi / "src/mjlab_microduck/robot/microduck/scene.xml")
+    original = mujoco.MjSpec.from_file(escena).compile()
+    sp = mujoco.MjSpec.from_file(escena)
+    lab.editar_escena(sp)
+    editado = sp.compile()
+    for nombre in ("floor", "left_foot_collision", "right_foot_collision", "ball_geom"):
+        i = mujoco.mj_name2id(original, mujoco.mjtObj.mjOBJ_GEOM, nombre)
+        j = mujoco.mj_name2id(editado, mujoco.mjtObj.mjOBJ_GEOM, nombre)
+        if i >= 0:
+            assert (original.geom_friction[i] == editado.geom_friction[j]).all() and original.geom_priority[i] == editado.geom_priority[j]                 and (original.geom_size[i] == editado.geom_size[j]).all(), f"el mundo normal de n1_02 cambia la fisica de {nombre}"
     check(f"laboratorio de mundos ({len(lab.MUNDOS)} mundos y 4 tipos de objeto)", True)
 except Exception as e:
     check("laboratorio de mundos (n1_02)", False, str(e)[:160])
