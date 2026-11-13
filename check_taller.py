@@ -69,6 +69,34 @@ try:
 except Exception as e:
     check("laboratorio de mundos (n1_02)", False, str(e)[:160])
 
+# la voltereta: checkpoints reales (0 = no gira, 750 = gira y acaba de pie)
+try:
+    import voltereta_env
+    with contextlib.redirect_stdout(io.StringIO()):
+        venv = voltereta_env.VolteretaEnv()
+        g0 = venv.probar(RAIZ / "workshop-ia-fisica" / "policies" / "voltereta" / "voltereta_00000.onnx")
+        g750 = venv.probar(RAIZ / "workshop-ia-fisica" / "policies" / "voltereta" / "voltereta_00750.onnx")
+    check(f"voltereta: checkpoint 0 no gira ({g0[0]:.0f} gr) y el 750 si ({g750[0]:.0f} gr, de pie: {g750[1]})", g0[0] < 60 and g750[0] > 300 and g750[1])
+except Exception as e:
+    check("voltereta (checkpoints)", False, str(e)[:160])
+
+# configurar un entrenamiento real: se leen las recompensas oficiales, se generan los paquetes y el parche de pesos se aplica y compila
+try:
+    import entrenamiento, py_compile, shutil, subprocess, tempfile
+    tmp = pathlib.Path(tempfile.mkdtemp())
+    for caso, c in entrenamiento.CASOS.items():
+        assert entrenamiento.leer_recompensas(caso), f"sin recompensas: {caso}"
+        entrenamiento.generar_paquete(caso, tmp / caso, constantes=None, pesos={entrenamiento.leer_recompensas(caso)[0][0]: ("*", 0.5)})
+        if c["cfg"]:
+            proj = tmp / (caso + "_proj")
+            (proj / pathlib.Path(c["cfg"]).parent).mkdir(parents=True)
+            shutil.copy(entrenamiento.OFICIAL / c["cfg"], proj / c["cfg"])
+            r = subprocess.run([sys.executable, str(tmp / caso / "2_aplicar_pesos.py"), str(proj)], capture_output=True, text=True)
+            assert r.returncode == 0, r.stderr[-200:]
+    check(f"paquetes de entrenamiento ({len(entrenamiento.CASOS)} casos: voltereta, rayuela, patines, obstaculos, cuerda)", True)
+except Exception as e:
+    check("paquetes de entrenamiento", False, str(e)[:160])
+
 # politicas para terreno irregular (Hugging Face) y el circuito de obstaculos
 try:
     import obstaculos

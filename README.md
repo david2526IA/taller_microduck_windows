@@ -15,7 +15,7 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
    Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
 3. Instala: `.\INSTALAR.bat` (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
    Debe terminar en **TODO LISTO**.
-4. Abre **[`PROGRAMA.md`](PROGRAMA.md)**: es el orden del taller, bloque a bloque, con el archivo que toca en cada momento.
+4. Abre **[`PROGRAMA.md`](PROGRAMA.md)**: es el orden del taller, bloque a bloque, con el archivo que toca en cada momento. Si una palabra no la conoces: [`GLOSARIO.md`](GLOSARIO.md).
 
 > En el explorador de VS Code, el doble clic **abre** el archivo para editarlo, no lo ejecuta. Los `.bat` se ejecutan desde el
 > Explorador de Windows, o escribiendo `.\INSTALAR.bat` en la terminal de VS Code.
@@ -26,11 +26,11 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 |---|---|---|
 | 1 · El robot en el simulador | La postura, la fricción, la masa | Un pato sin IA que se cae en menos de 1 s |
 | 2 · Laboratorio de mundos | Gravedad, colores, suelo, objetos, circuito de obstáculos | El mismo robot en la Luna, sobre hielo, en un laberinto |
-| 3 · El cerebro | Sentidos, ruido, pesos de la recompensa | Qué es una política y qué necesita para decidir |
-| 4 · Entrenar | Recompensa, exploración, tasa de aprendizaje | PPO real en tu PC: de ~1 a ~8 aciertos de 9 |
-| 5 · ROS 2 y la partida | Tu política, el objetivo | La partida de la rayuela con **tu** política |
-| 6 · Generalizar | Cuánto varía el mundo al entrenar | Una política que aguanta mundos que no ha visto |
-| Casos de uso | Patines, cuerda, equilibrio | Lo mismo con otros cuerpos y otros mundos |
+| 3 · El cerebro y la recompensa | Sentidos, ruido, pesos de la recompensa | Qué es una política y qué necesita para decidir |
+| 4 · La voltereta: de cero a experto | El checkpoint, y la recompensa y el PPO de la patada | Nueve momentos reales de un entrenamiento; entrenas tú en CPU |
+| 5 · Configura tu entrenamiento real | Pesos y ajustes de un entrenamiento de verdad | Tu paquete listo para lanzar en un PC con GPU |
+| 6 · ROS 2 y la partida | Tu política, el objetivo | La partida de la rayuela con **tu** política |
+| 7 · Sim-to-real | Cuánto varía el mundo al entrenar | Una política que aguanta mundos que no ha visto |
 
 **El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
 → guarda (Ctrl+S) → **cierra la ventana del robot** → `F5` y observa.
@@ -45,7 +45,7 @@ Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 ## Qué hay aquí
 
 ```
-PROGRAMA.md                                el orden del taller (5 h), bloque a bloque
+PROGRAMA.md / GLOSARIO.md                  el orden del taller (5 h), bloque a bloque · las palabras sin jerga
 INSTALAR.bat / COMPROBAR.bat               preparar el PC · comprobar que todo funciona
 MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables

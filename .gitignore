@@ -16,3 +16,6 @@ windows/escenas/
 # Herramientas del ponente (fuentes de las presentaciones, datos del ensayo)
 /herramientas_ponente/
 validacion_obstaculos.csv
+
+# lo que genera cada alumno al configurar su entrenamiento
+mi_entrenamiento/
