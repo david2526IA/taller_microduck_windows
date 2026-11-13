@@ -13,6 +13,15 @@ con que pie y a que velocidad patear. Es el mismo bucle que el entrenamiento rea
 (Como cada episodio es una sola patada, gamma y GAE no pintan nada aqui; en el robot real si, por eso el
 entrenamiento de verdad usa GPU y miles de robots a la vez.)
 
+EL ENTORNO POR DENTRO (asi es TODO entorno de RL, el de la patada y el de cualquier robot)
+Un entorno es un objeto con dos operaciones y una nota:
+   reset()          deja el mundo en el punto de partida:  el pato de pie, la pelota delante del pie.
+   step(accion)     ejecuta UNA accion y devuelve que paso:  "patea a 0,9 m/s con el pie derecho" -> "la pelota se paro en la casilla 7".
+   recompensa       la nota de ese resultado: mas puntos cuanto mas cerca de la casilla pedida. Esta mas abajo: leela y cambiala.
+Y cuatro decisiones de DISENO, que son lo dificil del RL:
+   que VE el cerebro (observacion) · que PUEDE HACER (accion) · que se PREMIA (recompensa) · cuando ACABA el intento (terminacion: aqui, tras la patada,
+   o si el pato se cae). Si algo no funciona, casi siempre hay que volver a una de estas cuatro, o al mundo (el modelo), o a los botones de PPO.
+
 COMO USARLO: cambia UN parametro, guarda (Ctrl+S) y ejecuta (F5). Mira la curva y la tabla final.
    Cada patada simulada tarda ~1 s: 60 rondas x 12 patadas = unos 3 minutos.
 Al terminar se guarda  mis_politicas/<NOMBRE_POLITICA>.json  y puedes jugar la rayuela con TU politica (n4_00, TABLA_PROPIA).

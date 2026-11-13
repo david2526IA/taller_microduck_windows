@@ -10,6 +10,17 @@ Un robot pequeño (el Microduck) **aprende una habilidad por ensayo y error**. R
 
 Cada bloque es una parte de ese camino. Y **entender cada paso** importa porque, cuando algo falla, sabes qué tocar.
 
+## Las cuatro etapas, con las preguntas de cada una (y con el Microduck)
+| Etapa | La pregunta | En este taller |
+|---|---|---|
+| **1 · Modelar** | ¿Cómo es el robot, y qué le pasa físicamente? | Piezas, articulaciones, masa, fricción. El pato sin cerebro se cae en menos de 1 s |
+| **2 · El entorno** | ¿Qué **ve** el cerebro, qué **puede hacer**, qué se **premia** y cuándo **acaba** el intento? | Un entorno = `reset()` + `step(acción)` + una recompensa. La patada a una casilla, la voltereta |
+| **3 · Entrenar** | ¿Cómo mejora? ¿Cuántas rondas, cuántos robots, qué tan grandes son los ajustes? | PPO: el que tú entrenas en CPU, y el real en GPU |
+| **4 · Desplegar** | ¿Aguanta fuera de la simulación? | Ruido, retrasos, otro suelo, otra masa. La brecha sim-to-real |
+
+**Lo importante del camino:** casi nunca sale a la primera, y se vuelve atrás una y otra vez. Por eso hay que **entender cada etapa**: cuando algo falla, sabes cuál tocar.
+Está resumido al final, en *«Si algo falla, ¿qué etapa tocas?»*, con los números que hemos medido.
+
 ## Cómo se trabaja (siempre igual)
 1. El ponente explica una idea (2-5 minutos).
 2. Tú abres **un archivo**, cambias **UN número** de los de arriba (cada uno dice en qué afecta), guardas (`Ctrl+S`).
@@ -87,7 +98,14 @@ Sin GPU no se puede entrenar con mjlab, pero **todo lo anterior al botón sí se
 | `exercises_rayuela/n6_03_entrenar_patines.py` | Los patines: otro cuerpo |
 | `exercises_rayuela/n6_04_entrenar_obstaculos.py` | Obstáculos (GTC): terreno irregular |
 
-Haz el 00 entero; de los otros cuatro, elige uno. Lo que se hace en todos: **elegir la tarea → leer la recompensa real → cambiar un peso → generar el paquete → leer el comando**.
+| `exercises_rayuela/n6_05_partir_de_lo_ya_entrenado.py` | **No empieces de cero:** parte de un cerebro que ya sabe andar (obstáculos, el duelo de la cuerda) |
+
+**No empieces de cero (currículo entre políticas).** Lo habitual es *subir*: se parte de una política que ya sabe lo básico (andar) y se le enseña lo siguiente.
+Según las fichas de sus autores: `alpha_walking` → `rough_walk_e` (terreno irregular, **800 rondas**, la mitad de caídas) frente a `rough_walk_g` (desde cero, 3.300 rondas).
+El duelo de la cuerda (dos patos que aprenden jugando entre sí) sale de ese mismo árbol: 6.000 rondas partiendo de su cerebro de andar.
+En nuestro circuito: nivel 4 (escombros), `alpha_walking` 3 de 6 · `rough_walk_e` **5 de 6** · `rough_walk_g` 3 de 6 (un solo azar: orientativo).
+
+Haz el 00 entero; de los otros, elige uno. Lo que se hace en todos: **elegir la tarea → leer la recompensa real → cambiar un peso → generar el paquete → leer el comando**.
 
 ## 6 · ROS 2 y la partida de la rayuela (35 min) · *desplegar la política*
 *Teoría: una política es un fichero .onnx; nodos, topics y lanzadores; cómo encajan visión, control y teleoperación.*
@@ -115,6 +133,20 @@ Haz el 00 entero; de los otros cuatro, elige uno. Lo que se hace en todos: **ele
 | `exercises_rayuela/n4_06_validar_politicas.py` | Mide con números los cerebros en el circuito |
 
 ---
+
+## Si algo falla, ¿qué etapa tocas?
+Es la idea más útil de todo el taller. Con números que hemos medido nosotros (simulación, pocas semillas: orientativo).
+
+| Lo que ves | Etapa | Qué tocas | Lo que hemos medido |
+|---|---|---|---|
+| **Se cae nada más empezar** | 1 · Modelar | Postura, masa, fricción… o le falta cerebro | El pato sin cerebro se cae en menos de 1 s y **ni la fricción ni la masa lo salvan** (`n0_00`) |
+| **Cambia todo en otro mundo** | 1 · Modelar | Gravedad, suelo, objetos | Misma patada: 1,74 m en la Tierra y 3,85 m en la Luna (`n1_02`) |
+| **La curva no sube: no aprende** | 3 · Entrenar | Tasa de aprendizaje, robots a la vez, exploración | Levantarse, 100 rondas: base 25,4 · tasa 0,00005 → 8,8 · tasa 0,01 → se descontrola · 256 robots → 6,1 · exploración 0,1 → −108 |
+| **Aprende, pero con un truco raro** | 2 · Entorno (recompensa) | Los pesos, sobre todo los castigos | El primer entrenamiento de la voltereta, sin castigo por girar rápido, aprendió un **latigazo** violento (lo cuenta el propio fichero de la tarea) |
+| **Solo acierta lo que vio** | 2 · Entorno (qué ve) | Que vea más variedad | Entrenar la patada solo con las casillas 3 y 7: acierta 2 de 9 frente a 8 (`n3_05`) |
+| **Va bien, luego empeora, es irregular** | 3 · Entrenar | Guardar checkpoints, **medir** y elegir | Voltereta: 750 → 10/10; 3.000 → 4/10; 11.000 → 10/10; 20.000 → 3/10. **El último no siempre es el mejor** (`n3_07`, `n3_08`) |
+| **Funciona en simulación, falla en otro mundo** | 4 · Desplegar | Entrenar con variedad, y que perciba lo que cambia | Un solo mundo: 8/9 y se hunde (4,2 de media) · variedad a ciegas: peor (2,0) · variedad percibiéndola: **6,8** (`n5_01`) |
+| **Aprender desde cero cuesta demasiado** | 3 · Entrenar | Partir de un cerebro que ya sabe algo | Terreno irregular: 800 rondas partiendo de andar frente a 3.300 desde cero (`n6_05`) |
 
 **Sin editar archivos:** `MJLAB.bat` abre `mini_mjlab`, con los mismos verbos que mjlab pero en CPU (`MJLAB list-envs`, `MJLAB params <entorno>`, `MJLAB play ...`, `MJLAB train ...`).
 

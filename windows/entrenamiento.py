@@ -237,7 +237,7 @@ def _pesos_a_texto(pesos):
     return ",".join(partes)
 
 
-def comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate=None, entropia=None, gamma=None, nube=False):
+def comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate=None, entropia=None, gamma=None, nube=False, partir_de=None):
     c = CASOS[caso]
     op = [f"uv run train {c['tarea']}",
           f"--env.scene.num-envs {num_envs}",
@@ -251,6 +251,9 @@ def comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning
         op.append(f"--agent.algorithm.entropy-coef {entropia}")
     if gamma is not None:
         op.append(f"--agent.algorithm.gamma {gamma}")
+    if partir_de:                       # CURRICULO ENTRE POLITICAS: no se empieza de cero, se parte de un cerebro que ya sabe algo
+        op.append(f"--agent.load-checkpoint {partir_de}")
+        op.append("--agent.resume True")
     if nube:
         op.append("--hf-jobs")
     return " \\\n    ".join(op)
@@ -304,7 +307,8 @@ if s != original:
 
 
 def generar_paquete(caso, destino, num_envs=4096, iteraciones=1000, guardar_cada=50, nombre=None,
-                    learning_rate=None, entropia=None, gamma=None, pesos=None, nube=False, constantes=None, variables_entorno=None):
+                    learning_rate=None, entropia=None, gamma=None, pesos=None, nube=False, constantes=None, variables_entorno=None,
+                    partir_de=None):
     """Escribe en 'destino' todo lo necesario para lanzar este entrenamiento en una maquina con GPU. Devuelve la lista de ficheros."""
     c = CASOS[caso]
     d = pathlib.Path(destino)
@@ -367,14 +371,14 @@ def generar_paquete(caso, destino, num_envs=4096, iteraciones=1000, guardar_cada
         # PASO 4: ENTRENAR (en tu GPU). {c['titulo']}
         cd microduck_rl
         {entorno.strip()}
-        """) + extra_env + comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate, entropia, gamma) + "\n")
+        """) + extra_env + comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate, entropia, gamma, partir_de=partir_de) + "\n")
     w("4b_entrenar_en_la_nube.sh", textwrap.dedent(f"""\
         #!/usr/bin/env bash
         # PASO 4 (alternativa): sin GPU propia, se envia a un Hugging Face Job (GPU en la nube; hace falta cuenta y `hf auth login`).
         # Cuesta dinero segun la GPU que elijas: mira el precio en Hugging Face ANTES de lanzar.
         cd microduck_rl
         {entorno.strip()}
-        """) + extra_env + comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate, entropia, gamma, nube=True) + "\n")
+        """) + extra_env + comando_entrenar(caso, num_envs, iteraciones, guardar_cada, nombre, learning_rate, entropia, gamma, nube=True, partir_de=partir_de) + "\n")
     w("LEEME.md", textwrap.dedent(f"""\
         # Tu paquete de entrenamiento: {c['titulo']}
 
@@ -389,6 +393,7 @@ def generar_paquete(caso, destino, num_envs=4096, iteraciones=1000, guardar_cada
         | tasa de aprendizaje | {learning_rate if learning_rate is not None else 'la de la tarea'} | tamano de cada ajuste |
         | exploracion (entropia) | {entropia if entropia is not None else 'la de la tarea'} | cuanto prueba cosas raras |
         | gamma | {gamma if gamma is not None else 'la de la tarea'} | cuanto piensa en el futuro |
+        | parte de un cerebro ya entrenado | {partir_de or 'no: empieza de cero'} | no empieza con una red al azar sino con una que ya sabe algo (curriculo entre politicas). Pon el .pt en la carpeta de la carrera: ver "Retomar" en entrenar/ENTRENAR.md |
         | pesos de recompensa cambiados | {txt_pesos or 'ninguno'} | `termino=valor` fija el peso; `termino*factor` lo multiplica |
         | constantes de la tarea cambiadas | {', '.join(f'{k}={v}' for k, v in dict(constantes or dict()).items()) or 'ninguna'} | se escriben en el fichero de la tarea con `2_aplicar_pesos.py` |
 
@@ -453,7 +458,8 @@ def principal(caso, **kw):
         print("   -", f.name)
     print("\n   El comando de entrenamiento que has configurado:\n")
     print(textwrap.indent(comando_entrenar(caso, kw.get("num_envs", 4096), kw.get("iteraciones", 1000), kw.get("guardar_cada", 50),
-                                           kw.get("nombre") or f"taller_{caso}", kw.get("learning_rate"), kw.get("entropia"), kw.get("gamma")), "      "))
+                                           kw.get("nombre") or f"taller_{caso}", kw.get("learning_rate"), kw.get("entropia"), kw.get("gamma"),
+                                           partir_de=kw.get("partir_de")), "      "))
     print("\n5) Y AQUI, SIN GPU:", c["aqui_puedes"])
     print("\n   Lo que has hecho es lo mismo que se hace antes de un entrenamiento real: elegir la tarea, leer y ajustar la recompensa,")
     print("   elegir cuanta experiencia y cuantas rondas, y dejarlo listo para lanzar. Solo falta una GPU y el boton de entrenar.")

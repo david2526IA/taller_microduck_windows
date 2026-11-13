@@ -93,7 +93,10 @@ try:
             shutil.copy(entrenamiento.OFICIAL / c["cfg"], proj / c["cfg"])
             r = subprocess.run([sys.executable, str(tmp / caso / "2_aplicar_pesos.py"), str(proj)], capture_output=True, text=True)
             assert r.returncode == 0, r.stderr[-200:]
+    entrenamiento.generar_paquete("obstaculos", tmp / "curriculo", partir_de="model_9999.pt")
+    assert "--agent.load-checkpoint model_9999.pt" in (tmp / "curriculo" / "4_entrenar.sh").read_text(encoding="utf-8")
     check(f"paquetes de entrenamiento ({len(entrenamiento.CASOS)} casos: voltereta, rayuela, patines, obstaculos, cuerda)", True)
+    check("curriculo entre politicas: el paquete parte de un checkpoint (--agent.load-checkpoint)", True)
 except Exception as e:
     check("paquetes de entrenamiento", False, str(e)[:160])
 
