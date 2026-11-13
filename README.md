@@ -13,9 +13,8 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
    o abre una terminal dentro y escribe `code .`).
 2. Abre la terminal de VS Code (`Ctrl+ñ`; `Ctrl+`` en teclado inglés) y clona **dentro** de la carpeta (con el punto final):
    ```
-   git clone --depth 1 https://github.com/Bravo-Robots/taller-microduck .
+   git clone https://github.com/Bravo-Robots/taller-microduck .
    ```
-   El `--depth 1` descarga solo la última versión (la mitad de peso): **imprescindible con wifi justo**. Sin él, el historial completo (~160 MB) puede cortarse a mitad de la descarga («early EOF»); si te pasa, vuelve a clonar con `--depth 1`.
    Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
 3. Instala: `.\INSTALAR.bat` (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
    Debe terminar en **TODO LISTO**.
@@ -72,6 +71,7 @@ con un ROS 2 en miniatura dentro de un proceso (`windows/ros_shim/`). No es ROS 
 | Síntoma | Qué hacer |
 |---|---|
 | `INSTALAR.bat` acaba sin TODO LISTO | Envía `instalar_log.txt` al ponente |
+| El clon se corta a mitad (`early EOF`) | Repite el mismo comando. Si sigue fallando, usa `git clone --depth 1 https://github.com/Bravo-Robots/taller-microduck .` |
 | `Filename too long` al clonar | `git config --global core.longpaths true` y clona en una ruta corta |
 | La ventana del robot no se abre / negra | Actualiza los drivers gráficos; en `COMPROBAR.bat` mira si falla algo antes |
 | Las teclas no hacen nada | Las teclas se pulsan en la **terminal**, no en la ventana del robot |
