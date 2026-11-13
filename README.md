@@ -13,8 +13,9 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
    o abre una terminal dentro y escribe `code .`).
 2. Abre la terminal de VS Code (`Ctrl+ñ`; `Ctrl+`` en teclado inglés) y clona **dentro** de la carpeta (con el punto final):
    ```
-   git clone https://github.com/david2526IA/taller_microduck_windows .
+   git clone --depth 1 https://github.com/david2526IA/taller_microduck_windows .
    ```
+   El `--depth 1` descarga solo la última versión (la mitad de peso): **imprescindible con wifi justo**. Sin él, el historial completo (~160 MB) puede cortarse a mitad de la descarga («early EOF»); si te pasa, vuelve a clonar con `--depth 1`.
    Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
 3. Instala: `.\INSTALAR.bat` (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
    Debe terminar en **TODO LISTO**.
