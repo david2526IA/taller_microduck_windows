@@ -1,4 +1,4 @@
-# 🏆 Hoja de puntuación — "haz que falle / haz que gane"
+# Hoja de puntuación — "haz que falle / haz que gane"
 
 Parejas. Cada pareja prueba **3 rondas de 60 s** con `exercises/n3_02_marcador.py`, que cuenta solo los segundos de pie y los empujones y da los puntos (también vale la demo normal, contando a mano).
 

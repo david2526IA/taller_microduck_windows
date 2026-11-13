@@ -1,7 +1,7 @@
 # TALLER · IA aplicada a un entorno físico
 
 Esta es tu hoja de ruta. Sigue los bloques **en orden**. En cada uno encontrarás:
-**🎯 Aprenderás** (la idea) · **🛠 Haz** (los pasos) · **👀 Observa** (qué mirar) · **💭 Piensa** (para fijar la idea).
+**Aprenderás** (la idea) · **Haz** (los pasos) · **Observa** (qué mirar) · **Piensa** (para fijar la idea).
 
 - **Nivel 1** = ejecutar y mirar. **Nivel 2** = cambiar 3-4 valores y ver qué pasa. Si terminas el Nivel 1, pasa al 2: nadie se queda parado.
 - Todos los comandos se escriben en la **terminal de VS Code** (`Terminal → New Terminal`), con esta carpeta abierta. También puedes abrir un ejercicio y pulsar **F5**.
@@ -35,7 +35,7 @@ Lo haces **nada más empezar la charla**: sin el repositorio no puedes interactu
 
 ## Bloque 1 · Despliega tu laboratorio (60 min)
 
-🎯 **Aprenderás** a moverte por un proyecto técnico: qué hay en cada carpeta, cómo se lanza y se modifica un ejercicio, y cómo comprobar que todo funciona. Todo lo que viene después parte de aquí.
+**Aprenderás** a moverte por un proyecto técnico: qué hay en cada carpeta, cómo se lanza y se modifica un ejercicio, y cómo comprobar que todo funciona. Todo lo que viene después parte de aquí.
 
 | Carpeta / fichero | Qué es | ¿Lo tocas? |
 |---|---|---|
@@ -52,16 +52,16 @@ Lo haces **nada más empezar la charla**: sin el repositorio no puedes interactu
 3. **Guarda** (Ctrl+S) y **cierra la ventana del robot**: no se recarga sola.
 4. **Lanza** otra vez y observa. ¿Acertaste?
 
-🛠 **Comprueba tu laboratorio:** `python check_setup.py --viewer` → debe acabar en **TODO LISTO** y abrir el robot 5 segundos.
-🛠 **Practica el ciclo:** abre `exercises/n1_01_ver_pieza.py`, cambia `PIEZA = "leg"` por `"foot_left"`, guarda, cierra y lanza. Es una pieza suelta del robot (una malla de triángulos); no hace falta entender nada más.
-🛠 Abre `check_setup.py` y busca qué comprueba cada línea.
-💭 **Piensa:** ¿qué dos cosas necesita un robot para moverse en un simulador? (cuerpo y cerebro). ¿Dónde está cada una en las carpetas?
+**Comprueba tu laboratorio:** `python check_setup.py --viewer` → debe acabar en **TODO LISTO** y abrir el robot 5 segundos.
+**Practica el ciclo:** abre `exercises/n1_01_ver_pieza.py`, cambia `PIEZA = "leg"` por `"foot_left"`, guarda, cierra y lanza. Es una pieza suelta del robot (una malla de triángulos); no hace falta entender nada más.
+Abre `check_setup.py` y busca qué comprueba cada línea.
+**Piensa:** ¿qué dos cosas necesita un robot para moverse en un simulador? (cuerpo y cerebro). ¿Dónde está cada una en las carpetas?
 
 ---
 
 ## Bloque 2 · Del plano al gemelo digital (30 min)
 
-🎯 **Aprenderás** cómo se convierte un robot real en un modelo que un simulador puede mover: piezas 3D → masas y motores → mundo.
+**Aprenderás** cómo se convierte un robot real en un modelo que un simulador puede mover: piezas 3D → masas y motores → mundo.
 
 | Etapa | Fichero (carpeta `robot/`) | Qué es |
 |---|---|---|
@@ -70,54 +70,54 @@ Lo haces **nada más empezar la charla**: sin el repositorio no puedes interactu
 | 4 · El mundo | `scene.xml` | suelo, luz, posturas guardadas |
 | 5 · Validación | `exercises/n1_00_ver_robot.py` | comprobar que se tiene en pie |
 
-🛠 **Etapa 1:** `python exercises/n1_01_ver_pieza.py`. Cambia `PIEZA` por otra de `robot/assets/` (`foot_left`, `leg`, `top_head_shell`…).
-🛠 **Etapa 5 (Nivel 1):** `python exercises/n1_00_ver_robot.py`. Cambia `POSE = "STAND"` por `"SIT"` o `"FOLD"`.
-🛠 **Nivel 2:** en `robot/scene.xml` busca `groundplane` y cambia `rgb1`/`rgb2` (colores del suelo). Guarda y vuelve a ejecutar.
-👀 **Observa:** con ratón izquierdo giras, derecho mueves, rueda = zoom. **Ctrl + clic derecho** arrastrando sobre el robot lo empuja.
+**Etapa 1:** `python exercises/n1_01_ver_pieza.py`. Cambia `PIEZA` por otra de `robot/assets/` (`foot_left`, `leg`, `top_head_shell`…).
+**Etapa 5 (Nivel 1):** `python exercises/n1_00_ver_robot.py`. Cambia `POSE = "STAND"` por `"SIT"` o `"FOLD"`.
+**Nivel 2:** en `robot/scene.xml` busca `groundplane` y cambia `rgb1`/`rgb2` (colores del suelo). Guarda y vuelve a ejecutar.
+**Observa:** con ratón izquierdo giras, derecho mueves, rueda = zoom. **Ctrl + clic derecho** arrastrando sobre el robot lo empuja.
 
-💭 **Piensa:** ¿qué cosas del robot real NO están en este modelo? (Pista: la holgura de los engranajes, la batería, los retrasos…)
+**Piensa:** ¿qué cosas del robot real NO están en este modelo? (Pista: la holgura de los engranajes, la batería, los retrasos…)
 
 ---
 
 ## Bloque 3 · El cerebro: cómo aprende una IA física (55 min)
 
-🎯 **Aprenderás** que el cerebro de un robot es una **función** (le entran números, le salen órdenes), que sus «botones» (pesos) se ajustan aprendiendo, y que lo que aprende depende de la **recompensa** con que se puntúa.
+**Aprenderás** que el cerebro de un robot es una **función** (le entran números, le salen órdenes), que sus «botones» (pesos) se ajustan aprendiendo, y que lo que aprende depende de la **recompensa** con que se puntúa.
 
 **Nivel 1 — Playground (navegador, opcional):** <https://playground.tensorflow.org>
-🛠 Añade neuronas, cambia el *learning rate* y mira cómo la red aprende a separar los puntos.
+Añade neuronas, cambia el *learning rate* y mira cómo la red aprende a separar los puntos.
 
 **Nivel 2 — el cerebro del pato, por dentro y en vivo:** `python exercises/n2_00_cerebro_en_vivo.py`
-🛠 Anda con las flechas **en la terminal** y empuja al pato con **Ctrl + clic derecho**.
-👀 **Observa:** a la izquierda de la terminal entran **61 números** (giro, inclinación, posición y velocidad de los motores…) y salen **14 órdenes**, una por motor, 50 veces por segundo.
-🛠 **Pruébalo estropeado** (cambia una constante de arriba, guarda y relanza):
+Anda con las flechas **en la terminal** y empuja al pato con **Ctrl + clic derecho**.
+**Observa:** a la izquierda de la terminal entran **61 números** (giro, inclinación, posición y velocidad de los motores…) y salen **14 órdenes**, una por motor, 50 veces por segundo.
+**Pruébalo estropeado** (cambia una constante de arriba, guarda y relanza):
 - `QUITAR_SENTIDO = "inclinacion"` → ¿qué pasa si el pato no sabe hacia dónde cae? Prueba también `"giro"`, `"posicion"`, `"velocidad"` y `"ultima_orden"`.
 - `RUIDO_SENTIDOS = 0.05`, `0.2`, `0.5` → sentidos «borrosos».
 - `RUIDO_ORDENES = 0.1`, `0.3`, `0.6` → motores «temblorosos».
 
-💭 **Piensa:** ¿a qué sentidos hace más caso el pato? ¿Por qué un cerebro entrenado para unas condiciones aguanta poco ruido?
+**Piensa:** ¿a qué sentidos hace más caso el pato? ¿Por qué un cerebro entrenado para unas condiciones aguanta poco ruido?
 
 **Nivel 2 — la recompensa, en vivo:** `python exercises/n2_01_recompensa_en_vivo.py`
-🛠 Anda y empuja al pato.
-👀 **Observa:** cada paso se puntúa con una **suma de piezas × pesos**: altura del tronco, verticalidad, avanzar y esfuerzo de los motores. ¿Qué piezas bajan cuando casi se cae?
-🛠 **Cambia los pesos** (`PESO_ALTURA`, `PESO_VERTICAL`, `PESO_AVANZAR`, `PESO_ESFUERZO`), guarda y relanza:
+Anda y empuja al pato.
+**Observa:** cada paso se puntúa con una **suma de piezas × pesos**: altura del tronco, verticalidad, avanzar y esfuerzo de los motores. ¿Qué piezas bajan cuando casi se cae?
+**Cambia los pesos** (`PESO_ALTURA`, `PESO_VERTICAL`, `PESO_AVANZAR`, `PESO_ESFUERZO`), guarda y relanza:
 - Pon `PESO_AVANZAR = 5` y los demás en `0`: solo premias avanzar. Empuja al pato hacia delante y mira la nota mientras se cae.
 
-💭 **Piensa:** si solo recibe puntos por avanzar, ¿qué truco raro podría aprender? ¿Por qué diseñar la recompensa es la parte difícil?
-✅ Si lo respondes, has entendido el aprendizaje por refuerzo.
+**Piensa:** si solo recibe puntos por avanzar, ¿qué truco raro podría aprender? ¿Por qué diseñar la recompensa es la parte difícil?
+Si lo respondes, has entendido el aprendizaje por refuerzo.
 
 **Nivel 2 — entra en la red:** `python exercises/n2_03_dentro_del_cerebro.py`
-🎯 El cerebro es un fichero con **197.896 números** (pesos). Aquí haces TÚ la misma cuenta que hace `onnxruntime`, capa a capa: 61 entradas → normalizar → 512 → 256 → 128 → 14 órdenes.
-👀 **Observa:** cuántas neuronas hay activas en cada capa y cómo cambia la actividad cuando empujas al pato.
-🛠 **Pruébalo** (cambia una constante, guarda, cierra la ventana y relanza):
+El cerebro es un fichero con **197.896 números** (pesos). Aquí haces TÚ la misma cuenta que hace `onnxruntime`, capa a capa: 61 entradas → normalizar → 512 → 256 → 128 → 14 órdenes.
+**Observa:** cuántas neuronas hay activas en cada capa y cómo cambia la actividad cuando empujas al pato.
+**Pruébalo** (cambia una constante, guarda, cierra la ventana y relanza):
 - `CEREBRO = "progresion_0_recien_nacido"` y después `"progresion_4_mejor"`: la misma red con otros pesos.
 - `APAGAR_CAPA1 = 0.5`, `0.9`, `0.99` y `1.0`: apagas neuronas de la primera capa. Predice cuándo se cae.
-💭 **Piensa:** aguanta con el 99 % de la primera capa apagada y solo cae al apagarla toda. ¿Qué dice eso de cómo reparte el trabajo una red entrenada?
+**Piensa:** aguanta con el 99 % de la primera capa apagada y solo cae al apagarla toda. ¿Qué dice eso de cómo reparte el trabajo una red entrenada?
 
 ---
 
 ## Bloque 4 · Laboratorio: pon a prueba al robot (90 min)
 
-🎯 **Aprenderás** qué hace un cerebro que una postura fija no hace, y por qué un robot entrenado en simulador es frágil cuando cambia el mundo.
+**Aprenderás** qué hace un cerebro que una postura fija no hace, y por qué un robot entrenado en simulador es frágil cuando cambia el mundo.
 
 ### A · Verlo actuar (10 min)
 - Windows: doble clic en `run_demo.bat`. Linux/Mac: `python exercises/n3_00_demo_con_cerebro.py`.
@@ -125,8 +125,8 @@ Lo haces **nada más empezar la charla**: sin el repositorio no puedes interactu
 - **Ctrl + clic derecho** en el visor para empujarlo.
 
 **Contraste — el robot SIN cerebro:** `python exercises/n2_02_sin_cerebro.py`
-👀 Se cae en menos de un segundo. Prueba otra `FRICCIONES` o `FACTOR_MASA`: ¿algo lo salva?
-💭 **Piensa:** ¿qué hace el cerebro que no hace una postura fija? (reacciona 50 veces por segundo)
+Se cae en menos de un segundo. Prueba otra `FRICCIONES` o `FACTOR_MASA`: ¿algo lo salva?
+**Piensa:** ¿qué hace el cerebro que no hace una postura fija? (reacciona 50 veces por segundo)
 
 ### B · Cambiar el mundo (20 min)
 Añade estas opciones al final del comando de la demo:
@@ -143,7 +143,7 @@ Ejemplo: `run_demo.bat --vin 6.5 --delay 2 4`
 
 ### C · Comparar cerebros (10 min)
 `python exercises/n3_01_progresion.py` y cambia `NIVEL` de 0 a 5: es el **mismo** robot con el **mismo** entrenamiento guardado en momentos distintos.
-👀 ¿Cuándo empieza a andar? ¿Cuándo aguanta un empujón?
+¿Cuándo empieza a andar? ¿Cuándo aguanta un empujón?
 
 ### D · Entrenar un cerebro (25 min)
 Hasta ahora usaste cerebros **ya entrenados**. Aquí ves cómo se entrena uno, con datos reales de un entrenamiento ya hecho. No se entrena nada hoy: no hace falta GPU.
@@ -181,9 +181,9 @@ Para entenderlo con calma: [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md).
 - Cualquier valor se cambia al lanzar: `--agent.algorithm.learning-rate 0.0005`, `--env.scene.num-envs 2048`, `--env.rewards.upright-sharp.weight 0`.
 
 **Misiones a tu ritmo (15 min).** Sigue con [`MISIONES.md`](MISIONES.md): 16 misiones cortas con casillas para anotar lo que observas. Si terminas, prueba los patines:
-> 🛼 **Extra visual:** `python exercises/n3_03_patinar.py`: el mismo robot con patines y otro cerebro.
+> **Extra visual:** `python exercises/n3_03_patinar.py`: el mismo robot con patines y otro cerebro.
 
-> 🏆 **Opcional, para quien vaya sobrado — reto «haz que falle / haz que gane»** (hoja en [`PUNTUACION_RETO.md`](PUNTUACION_RETO.md)): con `python exercises/n3_02_marcador.py` cuenta los segundos de pie y tus empujones (Ctrl + clic derecho) y da los **PUNTOS** (segundos de pie, máx. 60, menos empujones). Cambia `VOLTAJE_BATERIA`, `RETRASO_MOTORES`, `POTENCIA_MOTORES` o `ROZAMIENTO_PIES` para endurecer la ronda. Cierra con `Q` para repetir.
+> **Opcional, para quien vaya sobrado — reto «haz que falle / haz que gane»** (hoja en [`PUNTUACION_RETO.md`](PUNTUACION_RETO.md)): con `python exercises/n3_02_marcador.py` cuenta los segundos de pie y tus empujones (Ctrl + clic derecho) y da los **PUNTOS** (segundos de pie, máx. 60, menos empujones). Cambia `VOLTAJE_BATERIA`, `RETRASO_MOTORES`, `POTENCIA_MOTORES` o `ROZAMIENTO_PIES` para endurecer la ronda. Cierra con `Q` para repetir.
 
 **Graba tu mejor momento:** `Win + Alt + R` (Xbox Game Bar).
 
@@ -191,7 +191,7 @@ Para entenderlo con calma: [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md).
 
 ## Bloque 5 · Del gemelo digital a la realidad (20 min)
 
-🎯 **Aprenderás** por qué lo difícil no es entrenar en el simulador, sino que funcione fuera.
+**Aprenderás** por qué lo difícil no es entrenar en el simulador, sino que funcione fuera.
 
 Cada opción que has tocado representa un problema real:
 
@@ -204,7 +204,7 @@ Cada opción que has tocado representa un problema real:
 
 La receta contra esa brecha se llama **domain randomization**: entrenar con el mundo cambiando al azar para que el cerebro no dependa de un valor exacto.
 
-💭 **Piensa:** ¿qué cambiarías en el entrenamiento para que el robot aguante batería baja?
+**Piensa:** ¿qué cambiarías en el entrenamiento para que el robot aguante batería baja?
 
 **¿Y cómo se entrena un cerebro?** Hace falta una GPU NVIDIA, así que no se hace hoy, pero está todo explicado en [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md), con scripts que preparan el entorno y lanzan un entrenamiento de ~10 minutos.
 

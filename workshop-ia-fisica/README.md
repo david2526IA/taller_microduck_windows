@@ -1,7 +1,7 @@
 # IA aplicada a un entorno físico
 
 Taller en simulación con **Microduck**, un robot bípedo open source de Pollen Robotics, en el simulador **MuJoCo**.
-No hace falta robot ni GPU (entrenar un cerebro propio sí la necesita: ver [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md)). 👉 **Empieza por [`TALLER.md`](TALLER.md).**
+No hace falta robot ni GPU (entrenar un cerebro propio sí la necesita: ver [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md)). **Empieza por [`TALLER.md`](TALLER.md).**
 
 ## Cómo empezar (3 minutos)
 
