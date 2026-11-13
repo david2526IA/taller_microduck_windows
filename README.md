@@ -4,16 +4,18 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 **jugar a la rayuela**: patear una pelota con la fuerza justa para que caiga en la casilla elegida. Todo en simulación
 (MuJoCo), sin robot real y sin saber nada de IA de antemano.
 
-## Empezar (3 pasos)
+## Empezar (4 pasos)
 
-1. Clona este repositorio en una carpeta **corta** (por ejemplo `C:\taller`) y ábrela en VS Code:
+1. Crea una carpeta **vacía y corta**, fuera de OneDrive (por ejemplo `C:\taller`), ábrela con VS Code (clic derecho → *Abrir con Code*,
+   o abre una terminal dentro y escribe `code .`).
+2. Abre la terminal de VS Code (`Ctrl+ñ`; `Ctrl+`` en teclado inglés) y clona **dentro** de la carpeta (con el punto final):
    ```
-   git clone https://github.com/david2526IA/taller_microduck_windows C:\taller
-   code C:\taller
+   git clone https://github.com/david2526IA/taller_microduck_windows .
    ```
-2. Doble clic en **`INSTALAR.bat`** (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
+   Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
+3. Instala: `.\INSTALAR.bat` (2-3 minutos, sin internet ni administrador). **No toques el teclado hasta que acabe.**
    Debe terminar en **TODO LISTO**.
-3. Doble clic en **`RUTA.bat`**: la ruta guiada te lleva paso a paso.
+4. Ejecuta **`.\RUTA.bat`** (o doble clic desde el Explorador de Windows): la ruta guiada te lleva paso a paso.
 
 > En el explorador de VS Code, el doble clic **abre** el archivo para editarlo, no lo ejecuta. Para ejecutar un `.bat`,
 > hazlo desde el Explorador de Windows o escribe `.\INSTALAR.bat` en la terminal de VS Code.
