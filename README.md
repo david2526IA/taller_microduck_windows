@@ -71,6 +71,7 @@ con un ROS 2 en miniatura dentro de un proceso (`windows/ros_shim/`). No es ROS 
 | Síntoma | Qué hacer |
 |---|---|
 | `INSTALAR.bat` acaba sin TODO LISTO | Envía `instalar_log.txt` al ponente |
+| `ModuleNotFoundError: No module named 'mujoco'` al ejecutar un ejercicio | Estás usando otro Python. Ejecuta con **`F5`** (botón ▶), o cierra la terminal y abre una nueva con `Ctrl+ñ` y vuelve a escribir `python archivo.py`. Si sigue: `.\workshop-ia-fisica\.venv\Scripts\python.exe archivo.py` |
 | El clon se corta a mitad (`early EOF`) | Repite el mismo comando. Si sigue fallando, usa `git clone --depth 1 https://github.com/Bravo-Robots/taller-microduck .` |
 | `Filename too long` al clonar | `git config --global core.longpaths true` y clona en una ruta corta |
 | La ventana del robot no se abre / negra | Actualiza los drivers gráficos; en `COMPROBAR.bat` mira si falla algo antes |
