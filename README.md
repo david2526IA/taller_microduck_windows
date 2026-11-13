@@ -39,6 +39,9 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
 | **3 · Entrenar** | El checkpoint; la recompensa y el PPO de la patada; los pesos de un entrenamiento real | Nueve momentos reales de un entrenamiento; entrenas tú en CPU; tu paquete listo para una GPU |
 | **4 · Desplegar** | Tu política, el objetivo; cuánto varía el mundo al entrenar | La partida de la rayuela con **tu** política; una política que aguanta mundos que no ha visto |
 
+**El camino esencial:** hay más ejercicios de los que caben en 5 horas. En [`PROGRAMA.md`](PROGRAMA.md) están marcados con ⭐ los **12 imprescindibles**; el resto (➕) es para quien vaya sobrado o para casa.
+**Tu cuaderno:** [`CUADERNO.md`](CUADERNO.md) es una página para **predecir antes de cambiar** y apuntar lo que aprendes.
+
 **El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
 → guarda (Ctrl+S) → **cierra la ventana del robot** → `F5` y observa.
 
@@ -52,7 +55,7 @@ Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 ## Qué hay aquí
 
 ```
-PROGRAMA.md / GLOSARIO.md                  el orden del taller (5 h), bloque a bloque · las palabras sin jerga
+PROGRAMA.md / CUADERNO.md / GLOSARIO.md    el orden del taller (5 h) y sus 12 ejercicios esenciales · tu cuaderno · las palabras sin jerga
 INSTALAR.bat / COMPROBAR.bat               preparar el PC · comprobar que todo funciona
 MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables
