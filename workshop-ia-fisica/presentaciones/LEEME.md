@@ -1,24 +1,8 @@
-# Presentaciones del taller
+# La presentación del taller
 
-Tres presentaciones PowerPoint (.pptx, con su PDF) que se reproducen en cualquier PC, proyector o pantalla, sin internet. Los vídeos van incrustados.
+| Archivo | Qué es |
+|---|---|
+| **`Presentacion_03_taller_completo.pptx`** | **La del taller de Upskilling Week** (50 diapositivas, con notas del ponente). Para proyectar: tiene 7 vídeos incrustados que arrancan solos al llegar a su diapositiva (sin sonido, en bucle) |
+| `Presentacion_03_taller_completo.pdf` | La misma, para leerla en cualquier equipo. **No reproduce los vídeos**: solo muestra la imagen de portada |
 
-| Fichero | Qué es | Diapositivas |
-|---|---|---|
-| `Presentacion_01_teoria_didactica.pptx` | La principal: laboratorio primero, luego gemelo digital y cerebro; con más teoría y más imágenes | 56 |
-| `Presentacion_02_guia_practica.pptx` | Versión corta y práctica, con más referencias a los ejercicios | 20 |
-| **`Presentacion_03_taller_completo.pptx`** | **La del taller de Upskilling Week:** simulación, fundamentos de RL, práctica con mjlab y PPO, ROS 2 y la partida de la rayuela, y los casos de uso (patines, cuerda, balancín). Reutiliza diapositivas de la 01 y añade nuevas. Va con `PROGRAMA.md` | 50 |
-
-Cada diapositiva lleva sus **notas del ponente** (en PowerPoint: Vista → Notas).
-
-## Carpetas
-- `multimedia_real/`: fotos y vídeos reales del Microduck del press kit de Pollen Robotics (ver su `LEEME.md`).
-- `imagenes/`: renders propios del simulador MuJoCo y el logo de Bravo Robots.
-
-## Antes del día
-- Abre los dos ficheros en el PC que vas a usar y comprueba que los vídeos (diapositivas 4, 38, 52 y 53 de la principal y 18 de la corta) se reproducen.
-- Copia ambos ficheros al USB de rescate.
-
-## Créditos
-Robot y mallas 3D: Pollen Robotics (CC BY-NC-SA 4.0, uso no comercial). Fotos y vídeos reales: press kit de Pollen Robotics. Imágenes del simulador: renders propios.
-
-Los vídeos están incrustados en el `.pptx` y arrancan solos al llegar a su diapositiva (sin sonido, en bucle). El `.pdf` solo muestra la imagen de portada.
+Sigue el orden de los cuatro bloques: **1 Modelar · 2 El entorno y el RL · 3 Entrenar · 4 Desplegar**. El orden de los ejercicios está en [`PROGRAMA.md`](../../PROGRAMA.md).

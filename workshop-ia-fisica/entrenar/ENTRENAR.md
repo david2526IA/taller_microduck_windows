@@ -76,7 +76,7 @@ ls ~/microduck_rl/logs/rsl_rl/taller_taller/*/*.onnx
 ```
 
 Copia ese `.onnx` a la carpeta `policies/` del repo del taller y úsalo, por ejemplo, en
-`exercises/n3_02_marcador.py` cambiando `ANDAR = "policies/tu_cerebro.onnx"`.
+`exercises/n3_00_demo_con_cerebro.py` cambiando `ANDAR = "policies/tu_cerebro.onnx"`.
 (Para exportar un checkpoint intermedio hay que usar `scripts/export.py`, ver el README de microduck_rl.)
 
 ## Retomar un entrenamiento

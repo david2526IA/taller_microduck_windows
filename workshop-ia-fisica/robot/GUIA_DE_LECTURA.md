@@ -14,6 +14,8 @@ Cada pieza es una **malla de triángulos**. Para verlas:
 - **Una sola, con detalle:** `workshop-ia-fisica/exercises/n1_01_ver_pieza.py` (cambia `PIEZA`). Pulsa `W` en el visor para ver los triángulos.
 
 ## 2 · El robot: `robot/robot_groundcontact.xml` (434 líneas)
+**Para verlo montado y con las articulaciones, los motores y las piezas de colisión dibujados:** `workshop-ia-fisica/exercises/n1_04_robot_por_dentro.py` (F5). También imprime este mismo árbol en la terminal.
+
 Se lee de arriba abajo, y conviene plegar las secciones con las flechas de VS Code.
 
 | Líneas | Qué es | Qué mirar |
@@ -38,9 +40,9 @@ Una articulación se ve así: un `<body>` con un `<joint type="hinge" range="...
 | 19 | `<material>` | `texrepeat="5 5"`: cuántas casillas caben |
 | 24 | `<light>` | La luz |
 | 27 | `<geom name="floor">` | El suelo físico. `friction=" 1 ..."` es el agarre: 0.1 hielo, 2 goma |
-| 29-60 | `<keyframe>` | Posturas guardadas: `STAND` (de pie), `SIT` (sentado), `FOLD` (plegado). Las usa `n1_00` |
+| 29-60 | `<keyframe>` | Posturas guardadas: `STAND` (de pie), `SIT` (sentado), `FOLD` (plegado). Las usa `n1_04` |
 
-Cambia un color, guarda (`Ctrl+S`) y ejecuta `n1_00_ver_robot.py` (F5): lo verás al momento. El archivo ya trae comentarios «CAMBIA ESTO».
+Cambia un color, guarda (`Ctrl+S`) y ejecuta `n1_04_robot_por_dentro.py` (F5): lo verás al momento. El archivo ya trae comentarios «CAMBIA ESTO».
 
 ## 4 · Cómo encaja con el resto del taller
 - Los ejercicios de **mundos** (`n1_02`) cambian la escena **con código**, sin tocar este XML: aquí ves lo mismo escrito a mano.

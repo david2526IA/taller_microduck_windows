@@ -19,7 +19,8 @@ workshop-ia-fisica\.venv\Scripts\python.exe exercises_rayuela\NOMBRE.py
 
 | Ejercicio | Qué hace | Parámetros (y en qué afectan) | Qué observar |
 |---|---|---|---|
-| `workshop-ia-fisica\exercises\n1_00_ver_robot.py` | El robot en el visor | `POSE` (STAND/SIT/FOLD) | Ctrl + clic derecho lo empuja |
+| `workshop-ia-fisica\exercises\n1_03_despiece.py` | **El despiece:** las 43 piezas 3D (STL) del pato, sueltas y en cuadrícula | `COLUMNAS`, `PIEZAS`, `NORMALIZAR` | De qué piezas está hecho el robot; compara el pie izquierdo y el derecho |
+| `workshop-ia-fisica\exercises\n1_04_robot_por_dentro.py` | **El robot y la escena por dentro:** las articulaciones, los motores, el centro de masa y las piezas de colisión dibujados sobre el robot; imprime el árbol del XML | `ESCENA`, `POSE`, `MOSTRAR`, `FISICA` | 15 piezas, 14 motores; las piezas de colisión son mucho más simples que las bonitas |
 | `workshop-ia-fisica\exercises\n1_01_ver_pieza.py` | Una pieza 3D suelta | `PIEZA` | Que el robot son mallas + masas + motores |
 | **`n1_02_tu_escena.py`** | **Laboratorio de mundos:** la rayuela en un mundo que TÚ editas | `MUNDO` (tierra, luna, marte, hielo, desierto, noche), `GRAVEDAD`, `ROZAMIENTO_SUELO`, `COLOR_SUELO_1/2`, `COLOR_CIELO_ARRIBA/ABAJO`, `ESCALA_MASA_PATO`, `RADIO_PELOTA`, `MASA_PELOTA`, `OBJETOS` (caja, rampa, esfera, cilindro), `COLOR_TABLERO` | El cerebro se entrenó en la Tierra: en la Luna o sobre hielo se nota. ¿Sigue detectando la pelota la visión con un suelo oscuro? Reto: un laberinto de cajas hasta la casilla 9. |
 | **`workshop-ia-fisica/exercises/n3_07_voltereta_checkpoints.py`** | **La voltereta, checkpoint a checkpoint:** el mismo robot en 9 momentos de un entrenamiento real de 20.750 rondas | `CHECKPOINT` (0, 500, 750, 1250, 3000, 7000, 11000, 20000, 20750), perturbaciones opcionales | Pulsa `R`. El 0 no hace nada; el 750 ya gira; el 3.000 y el 7.000 son irregulares; el 11.000 y el 20.750 son estables. |

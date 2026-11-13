@@ -19,3 +19,7 @@ validacion_obstaculos.csv
 
 # lo que genera cada alumno al configurar su entrenamiento
 mi_entrenamiento/
+
+# material de trabajo de la presentacion (solo en el PC del ponente; la presentacion ya lo lleva dentro)
+workshop-ia-fisica/presentaciones/imagenes/
+workshop-ia-fisica/presentaciones/multimedia_real/

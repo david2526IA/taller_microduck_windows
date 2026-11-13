@@ -81,6 +81,17 @@ try:
 except Exception as e:
     check("laboratorio de mundos (n1_02)", False, str(e)[:160])
 
+# el robot en XML y sus piezas STL (lo que ensenan n1_03 y n1_04)
+try:
+    carpeta = RAIZ / "workshop-ia-fisica" / "robot"
+    stl = sorted((carpeta / "assets").glob("*.stl"))
+    mujoco.MjModel.from_xml_string("<mujoco><compiler meshdir='%s'/><asset>%s</asset><worldbody/></mujoco>" % (
+        (carpeta / "assets").as_posix(), "".join(f"<mesh name='m{i}' file='{p.name}'/>" for i, p in enumerate(stl))))
+    rob = mujoco.MjModel.from_xml_path(str(carpeta / "scene.xml"))
+    check(f"el robot en XML: {len(stl)} piezas STL, {rob.nbody - 1} piezas montadas y {rob.nu} motores", len(stl) == 43 and rob.nu == 14)
+except Exception as e:
+    check("el robot en XML y sus piezas STL", False, str(e)[:160])
+
 # la voltereta: checkpoints reales (0 = no gira, 750 = gira y acaba de pie)
 try:
     import voltereta_env

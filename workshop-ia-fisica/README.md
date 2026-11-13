@@ -1,66 +1,33 @@
-# IA aplicada a un entorno físico
+# El proyecto base: el robot, los cerebros y los ejercicios
 
-Taller en simulación con **Microduck**, un robot bípedo open source de Pollen Robotics, en el simulador **MuJoCo**.
-No hace falta robot ni GPU (entrenar un cerebro propio sí la necesita: ver [`entrenar/ENTRENAR.md`](entrenar/ENTRENAR.md)). **Empieza por [`TALLER.md`](TALLER.md).**
-
-## Cómo empezar (3 minutos)
-
-1. Abre esta carpeta en VS Code.
-2. Haz **doble clic en `INSTALAR.bat`** (instala todo sin internet).
-3. Haz **doble clic en `COMPROBAR.bat`**: debe acabar en **TODO LISTO** y mostrar el robot.
-4. Abre [`TALLER.md`](TALLER.md) y sigue los bloques. El orden: laboratorio → gemelo digital → cerebro → laboratorio con IA → realidad.
-
-**El ciclo de trabajo de todo el taller:** abre el ejercicio → cambia UN valor → guarda (Ctrl+S) y **cierra la ventana del robot** → lánzalo otra vez y observa.
-
-## Qué hay aquí
+Aquí vive todo lo que usa el taller con el **Microduck** (Pollen Robotics) en **MuJoCo**, en un PC sin GPU.
+**El orden del taller está en [`PROGRAMA.md`](../PROGRAMA.md)** (en la raíz del repositorio).
 
 ```
 workshop-ia-fisica/
-├── TALLER.md            ← la guía por bloques, con qué observar y qué pensar
-├── MISIONES.md          ← 16 misiones cortas para anotar lo que ves
-├── PUNTUACION_RETO.md   ← hoja del reto por parejas (opcional)
-├── robot/               ← el CUERPO: modelo 3D y física del robot
-├── policies/            ← el CEREBRO: redes neuronales ya entrenadas (.onnx)
-├── exercises/           ← tus ejercicios (n1 = solo mirar · n2 = tocar valores · n3 = laboratorio con IA)
-├── entrenar/            ← cómo se ENTRENA un cerebro (GPU NVIDIA): scripts explicados + guía
-├── scripts/
-│   └── infer_policy.py  ← pone a un cerebro a manejar el cuerpo
-├── presentaciones/      ← las diapositivas del taller
-├── INSTALAR.bat         ← prepara tu PC (doble clic, una vez)
-├── COMPROBAR.bat        ← comprueba que todo funciona
-├── run_demo.bat         ← demo con todas las habilidades (doble clic)
-├── run_reto.bat         ← la demo lista para el reto (opcional)
-├── run_ver_robot.bat    ← abre el robot en el visor (doble clic)
-├── check_setup.py       ← el programa de la comprobación
-├── requirements.txt     ← lista de librerías de Python
-└── wheels/              ← las librerías ya descargadas (para instalar sin internet)
+├── robot/        el CUERPO: las piezas 3D (assets/*.stl), el robot en XML y la escena. Empieza por GUIA_DE_LECTURA.md
+├── policies/     el CEREBRO: redes neuronales ya entrenadas (.onnx), incluidos los 9 checkpoints de la voltereta
+├── exercises/    los ejercicios de esta carpeta (lista abajo)
+├── scripts/      infer_policy.py: pone a un cerebro a manejar el cuerpo
+├── entrenar/     cómo se ENTRENA de verdad (GPU NVIDIA): scripts explicados y curvas reales
+├── wheels/       las librerías para instalar sin internet
+└── presentaciones/   las diapositivas del taller
 ```
 
-## Los comandos que importan
+## Los ejercicios de esta carpeta
+Se ejecutan con **F5** (con el archivo abierto). Arriba de cada uno están los parámetros, y cada uno dice en qué afecta.
 
-Abre la carpeta en VS Code y, en su terminal (`Terminal → New Terminal`):
-
-| Quiero… | Comando |
+| Archivo | Qué hace |
 |---|---|
-| Comprobar que todo funciona | `python check_setup.py --viewer` |
-| Ver el robot | `python exercises/n1_00_ver_robot.py` |
-| Verlo andar con IA | `run_demo.bat` (en Linux: `python exercises/n3_00_demo_con_cerebro.py`) |
-| Verlo patinar | `python exercises/n3_03_patinar.py` |
-| Jugar al reto con marcador | `python exercises/n3_02_marcador.py` |
+| `n1_01_ver_pieza.py` | Una pieza 3D suelta |
+| `n1_03_despiece.py` | Las 43 piezas 3D, en cuadrícula |
+| `n1_04_robot_por_dentro.py` | El robot montado, con articulaciones, motores y colisiones dibujados |
+| `n2_00_cerebro_en_vivo.py` | Le quitas un sentido al cerebro o le metes ruido |
+| `n2_01_recompensa_en_vivo.py` | La recompensa del pato, en vivo |
+| `n2_03_dentro_del_cerebro.py` | Qué entra y qué sale de una política |
+| `n3_00_demo_con_cerebro.py` | El robot con IA: andar, sentarse, voltereta; batería baja y retrasos |
+| `n3_04_curvas_entrenamiento.py` | Curvas reales de entrenamiento |
+| `n3_07_voltereta_checkpoints.py` | La voltereta en nueve momentos de un entrenamiento real |
+| `n3_08_voltereta_medir.py` | Mide cada checkpoint con números |
 
-## Controles de la demo
-Se pulsan **en la terminal**, no en la ventana del robot.
-
-| Tecla | Acción | | Tecla | Acción |
-|---|---|---|---|---|
-| ↑ ↓ | adelante / atrás | | `Y` | sentarse / levantarse |
-| ← → | lado | | `R` | voltereta |
-| `A` / `E` | girar | | Espacio | parar |
-| `Q` | salir | | | |
-
-En el visor: **Ctrl + clic derecho arrastrando = empujar al robot**.
-
-## Créditos y licencias
-- Robot y políticas: [Pollen Robotics](https://github.com/pollen-robotics/microduck_rl) (código Apache-2.0).
-- Mallas 3D (`robot/assets/`): CC BY-NC-SA 4.0 — solo uso **no comercial** (ver `robot/LICENSE-MODELS.md`).
-- `scripts/infer_policy.py` adaptado para Windows; original Apache-2.0.
+Origen y licencias: [`ORIGEN.md`](../ORIGEN.md) (las mallas 3D son CC BY-NC-SA: solo uso no comercial).

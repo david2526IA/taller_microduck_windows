@@ -3,7 +3,7 @@ Estas curvas son REALES: las sacamos entrenando el mismo robot (levantarse del s
 cambiando UN solo parametro cada vez. Tu no necesitas GPU: aqui las comparas.
 
 COMO SE USA
-  1) ANTES de marcar una casilla, lee que se cambio y APUNTA en MISIONES.md que crees que pasara.
+  1) ANTES de marcar una casilla, lee que se cambio en ese experimento.
   2) Marca la casilla: aparece la curva. ¿Acertaste?
   3) Cambia de grafica (recompensa / cuanto aguanta / exploracion) y el eje de abajo (rondas / minutos).
   Si la curva SUBE, el robot esta aprendiendo. Cuanto antes suba, mejor entrenado va.
