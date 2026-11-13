@@ -7,6 +7,8 @@ robot en XML) esas mismas piezas se montan como un ARBOL: cada una cuelga de otr
 COMO USARLO: pulsa F5. Se abre el visor 3D.
    Raton: izquierda = girar | derecha = mover | rueda = acercar.   Cierra la ventana para salir.
    Pulsa W en el visor para ver la malla de triangulos de cada pieza.
+LOS COLORES NO SIGNIFICAN NADA: un STL solo guarda la forma (triangulos), no el color. Aqui se repiten cinco tonos para distinguir piezas vecinas.
+El color real del pato (blanco y naranja) esta en el XML del robot, en los materiales de cada pieza.
 En la terminal sale la lista: el numero de cada pieza, su nombre y en que fila y columna esta. Para mirar una sola con detalle: n1_01_ver_pieza.py.
 """
 import math, pathlib
