@@ -35,6 +35,8 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 **El ciclo de trabajo de todo el taller:** abre el ejercicio → cambia UN parámetro (están arriba, con comentarios que dicen en qué
 afecta) → guarda (Ctrl+S) → **cierra la ventana del robot** → lánzalo otra vez y observa.
 
+**Las diapositivas del taller** están en el repositorio: `workshop-ia-fisica/presentaciones/Presentacion_03_taller_completo.pptx` (y su `.pdf`). Cada diapositiva lleva notas del ponente.
+
 Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 
 **Sin editar ficheros:** `MJLAB.bat` abre `mini_mjlab`, con los mismos verbos que mjlab pero en CPU:
@@ -47,6 +49,7 @@ INSTALAR.bat / COMPROBAR.bat / RUTA.bat   doble clic: preparar el PC · comproba
 MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables
 workshop-ia-fisica/   el proyecto base: robot, cerebros (.onnx), ejercicios n1-n3, librerias offline (wheels/), entrenar/
+workshop-ia-fisica/presentaciones/   LAS PRESENTACIONES: Presentacion_03_taller_completo (.pptx y .pdf) es la del taller; la 01 y la 02 son las anteriores
 rayuela-oficial/      la Rayuela oficial de Bravo Robots (sin modificar)
 windows/              la capa para Windows: lanzador, ROS 2 en miniatura, entorno de entrenamiento, cuerda
 ```
