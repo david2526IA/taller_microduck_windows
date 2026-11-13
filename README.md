@@ -1,8 +1,11 @@
-﻿# Taller · RL en MuJoCo: del entrenamiento al despliegue de políticas para el Microduck
+# Taller · RL en MuJoCo: del entrenamiento al despliegue de políticas para el Microduck
 
-Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, el **Microduck** (Pollen Robotics), aprende a
-**jugar a la rayuela**: patear una pelota con la fuerza justa para que caiga en la casilla elegida. Todo en simulación
-(MuJoCo), sin robot real y sin saber nada de IA de antemano.
+Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, el **Microduck** (Pollen Robotics), **aprende habilidades por ensayo y error**
+(aprendizaje por refuerzo, RL): una **voltereta**, patear una pelota con la fuerza justa para **jugar a la rayuela**, andar por un circuito de obstáculos...
+Todo en simulación (MuJoCo), sin robot real y sin saber nada de IA de antemano.
+
+**Qué te llevas:** entiendes el camino completo (*modelar el robot → crear el entorno → entrenar → desplegar*), has cambiado mundos, recompensas y botones de
+entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sales con **tu propio paquete de entrenamiento listo para lanzar** en un PC con GPU o en la nube.
 
 ## Empezar (4 pasos)
 
@@ -19,6 +22,12 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 
 > En el explorador de VS Code, el doble clic **abre** el archivo para editarlo, no lo ejecuta. Los `.bat` se ejecutan desde el
 > Explorador de Windows, o escribiendo `.\INSTALAR.bat` en la terminal de VS Code.
+
+## Qué necesitas
+- **Windows 10 u 11** de 64 bits, **sin GPU**, con unos 4 GB libres. **Python 3.12**, **Git** y **VS Code** (los instala informática; `INSTALAR.bat` lo comprueba).
+- Drivers gráficos al día (el visor 3D usa OpenGL 3.3 o superior). Una carpeta **corta y fuera de OneDrive**, por ejemplo `C:\taller`.
+- Internet solo para el `git clone`; después, nada.
+- No hace falta saber programar: en cada ejercicio solo cambias números y lees lo que pasa.
 
 ## Cómo se trabaja: un archivo, una cosa que cambiar, un efecto que ver
 

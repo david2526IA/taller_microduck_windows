@@ -29,6 +29,11 @@ Mantén las dos terminales separadas (no actives el venv en la de ROS ni cargues
 En `workshop-ia-fisica/entrenar/` están los scripts que usó el ponente: `preparar_entrenamiento.sh` (instala `microduck_rl` y mjlab y comprueba la GPU), `entrenar.sh` (un entrenamiento corto, ~10 min en una RTX 4090), `experimentos.sh` (6 experimentos de parámetros) y `ver_curva.sh`. Léelos con `ENTRENAR.md`.
 Sirve Linux o Windows con WSL2 y una GPU NVIDIA. Sin GPU no se puede entrenar con mjlab: usa `MJLAB.bat train Mini-Kick-MicroDuck` (Windows) o `n3_05_entrena_la_patada.py`, que entrena un PPO pequeño en CPU.
 
+### Tu paquete de entrenamiento (`mi_entrenamiento/`)
+Los ejercicios `exercises_rayuela/n6_00` a `n6_05` (en Windows) leen la configuración oficial de mjlab y escriben, para cada caso, una carpeta `mi_entrenamiento/<caso>/` con scripts listos para Ubuntu con GPU:
+`1_preparar.sh` (instala todo) · `2_aplicar_pesos.py` (aplica tus cambios de recompensa) · `3_probar.sh` (**prueba de humo**: 64 robots, 5 rondas; siempre antes del largo) · `4_entrenar.sh` (en tu GPU) · `4b_entrenar_en_la_nube.sh` (en una GPU de Hugging Face). Cópiala a la máquina con GPU y sigue el `LEEME.md` de esa carpeta.
+Estos paquetes **no se han ejecutado** (no hay GPU en la máquina del taller): por eso existe la prueba de humo.
+
 ## Lo que NO hay
 - Una versión Ubuntu de los ejercicios nuevos (circuito de obstáculos, duelo de la cuerda, equilibrio, sim-to-real): están escritos para Windows. La lógica de simulación es de MuJoCo y se podría portar quitando el teclado de `msvcrt`.
 - Instrucciones probadas para WSL2 con GPU.
