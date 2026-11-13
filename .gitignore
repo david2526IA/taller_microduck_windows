@@ -5,6 +5,7 @@ __pycache__/
 instalar_log.txt
 MUJOCO_LOG.TXT
 mi_tabla_patada.json
+mis_politicas/
 windows/escenas/
 
 # Material solo del ponente (no se sube al repo de los asistentes)
@@ -14,3 +15,4 @@ windows/escenas/
 
 # Herramientas del ponente (fuentes de las presentaciones, datos del ensayo)
 /herramientas_ponente/
+validacion_obstaculos.csv

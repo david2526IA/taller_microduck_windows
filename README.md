@@ -27,8 +27,9 @@ Taller práctico de 5 horas en **Windows, sin GPU**. Un pequeño robot bípedo, 
 | 3 · Meterle IA | Anda, se sienta, rueda, se recupera de empujones | El cerebro es una función: sentidos → órdenes |
 | 4 · Dentro del cerebro | 61 entradas y 14 salidas en vivo | Observación → cerebro → acción |
 | 5 · Cómo se le puntúa | La recompensa como suma de piezas × pesos | Diseñar la recompensa es lo difícil |
-| 6 · Entrenar | PPO de verdad, ~2 min: de ~1 a ~6 aciertos de 9 | El bucle completo del RL |
+| 6 · Entrenar | PPO de verdad, ~3 min: de ~1 a ~8 aciertos de 9 | El bucle completo del RL |
 | 7 · El resultado | La partida de la rayuela con **tu** política | Simulación + cerebro + visión + control |
+| 8 · Sim-to-real | Contrato del .onnx y robustez en crescendo (`n5_00`) | Cómo se prepara una política antes del robot real |
 | Casos de uso | Patines · duelo de la cuerda · equilibrio · ROS 2 en vivo · tu propia escena | Lo mismo con otros cuerpos y otros mundos |
 
 **El ciclo de trabajo de todo el taller:** abre el ejercicio → cambia UN parámetro (están arriba, con comentarios que dicen en qué

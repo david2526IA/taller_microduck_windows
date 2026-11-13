@@ -56,6 +56,13 @@ try:
 except Exception as e:
     check("circuito de obstaculos", False, str(e)[:160])
 
+# preparar el sim-to-real: el contrato de un cerebro
+try:
+    import sim2real
+    check("contrato de un .onnx (sim-to-real)", all(ok for _, ok, _ in sim2real.contrato("alpha_walking")), "falla alguna comprobacion")
+except Exception as e:
+    check("sim-to-real", False, str(e)[:160])
+
 # el duelo de la cuerda: escena de dos patos (la genera el constructor oficial), motores BAM y el cerebro entrenado
 try:
     import contextlib, io

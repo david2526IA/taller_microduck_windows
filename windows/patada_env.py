@@ -36,12 +36,14 @@ sim_setup.SimCameras = _SinCamara
 
 
 class PatadaEnv:
-    def __init__(self, gravedad=9.81, masa_pelota=None, rozamiento_pelota=None, segundos_tras_patada=3.0):
+    def __init__(self, gravedad=9.81, masa_pelota=None, rozamiento_pelota=None, segundos_tras_patada=4.0, segundos_asentar=1.0):
         """
         gravedad            m/s^2 (9.81 = Tierra, 1.62 = Luna).  AFECTA A: cuanto tarda en pararse la pelota y a la patada.
         masa_pelota         kg (None = la del modelo).           AFECTA A: lo lejos que llega con la misma velocidad.
         rozamiento_pelota   rozamiento suelo-pelota (None = el del modelo). AFECTA A: cuanto rueda tras caer.
-        segundos_tras_patada cuanto se espera a que la pelota se pare.
+        segundos_tras_patada cuanto se espera a que la pelota se pare (4 s: a los 6 s de la patada ya esta a menos de 3 cm de donde acaba).
+        segundos_asentar    el pato se queda de pie este tiempo ANTES de patear. Sin ello la patada sale mas corta y torcida
+                            (medido: casilla 5 con 0 s -> x=1,18; con 1 s -> x=1,37, igual que en la partida de la Rayuela).
         """
         self.w = sim_worker.SimWorker(sim_worker.XML_PATH, sim_worker.POLICIES_DIR, False)
         m = self.w.model
@@ -53,6 +55,7 @@ class PatadaEnv:
             m.pair_friction[:, :2] = rozamiento_pelota
         self.snap = (self.w.data.qpos.copy(), self.w.data.qvel.copy())
         self.espera = segundos_tras_patada
+        self.asentar = segundos_asentar
 
     def reset(self):
         import contextlib, io
@@ -71,6 +74,12 @@ class PatadaEnv:
         self.reset()
         w = self.w
         with contextlib.redirect_stdout(io.StringIO()):          # el codigo oficial imprime mucho
+            for _ in range(int(self.asentar / w.control_dt)):     # de pie un rato antes de patear
+                sim_setup.step_behavior_timers(w.policy, w.control_dt)
+                w.policy.apply_action(w.policy.infer())
+                for _ in range(sim_setup.CONTROL_DECIMATION):
+                    w.bam_ctrl.update()
+                    mujoco.mj_step(w.model, w.data)
             w.policy.trigger_behavior(pie, kick_speed=float(velocidad))
             total = sim_setup.KICK_DURATION_S + self.espera
             cayo = False

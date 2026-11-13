@@ -8,7 +8,8 @@ cada "entorno" es uno de los ejercicios, y los parametros se cambian desde la li
    MJLAB params  Mini-Obstacles-MicroDuck                  muestra los parametros que se pueden cambiar (y su valor)
    MJLAB play    Mini-Obstacles-MicroDuck --set NIVEL=3 --set CEREBRO=rough_walk_e
    MJLAB train   Mini-Kick-MicroDuck --set ITERACIONES=40 --set LEARNING_RATE=0.02
-   MJLAB validate Mini-Obstacles-MicroDuck --set PRUEBAS=10
+   MJLAB validate Mini-Obstacles-MicroDuck --set PRUEBAS=10      (en Mini-Kick: compara tus politicas entrenadas)
+   MJLAB validate Mini-Sim2Real-MicroDuck                        (contrato del .onnx + robustez antes de llevarla al robot)
 
 (Doble clic en MJLAB.bat abre una consola con este programa; o:  workshop-ia-fisica\\.venv\\Scripts\\python.exe mini_mjlab.py list-envs)
 """
@@ -25,7 +26,7 @@ TALLER = RAIZ / "workshop-ia-fisica" / "exercises"
 ENTORNOS = {
     "Mini-Scene-MicroDuck": ("Tu propia escena: gravedad, rozamiento, masas, obstaculos", EJ / "n1_02_tu_escena.py", None, None,
                              "escena MJCF personalizada (spec_fn de mjlab)"),
-    "Mini-Kick-MicroDuck": ("Rayuela: patear la pelota a una casilla", EJ / "n4_00_partida_rayuela.py", EJ / "n3_05_entrena_la_patada.py", None,
+    "Mini-Kick-MicroDuck": ("Rayuela: patear la pelota a una casilla", EJ / "n4_00_partida_rayuela.py", EJ / "n3_05_entrena_la_patada.py", EJ / "n3_06_comparar_politicas.py",
                             "Mjlab-BallKickSpeed-{Left,Right}-Flat-MicroDuck + el juego de Bravo Robots"),
     "Mini-Obstacles-MicroDuck": ("Circuito de obstaculos (GTC Berlin): rampa, escalones, cuadricula, escombros",
                                  EJ / "n4_05_obstaculos.py", None, EJ / "n4_06_validar_politicas.py",
@@ -36,6 +37,8 @@ ENTORNOS = {
                                "Mjlab-Velocity-Flat-MicroDuck con empujones aleatorios (push_by_setting_velocity)"),
     "Mini-Skates-MicroDuck": ("Patines: otro cuerpo, otro cerebro", EJ / "n4_02_patines.py", None, None,
                               "Mjlab-Velocity-Flat-MicroDuck-Rollers"),
+    "Mini-Sim2Real-MicroDuck": ("Preparar el sim-to-real: contrato del .onnx y robustez en crescendo (aleatorizacion del dominio)", None, None,
+                                EJ / "n5_00_preparar_sim2real.py", "domain randomization + presets backlash (Isaac Lab / mjlab) y despliegue con robotctl"),
     "Mini-Rayuela-ROS2-MicroDuck": ("ROS 2 en vivo: nodos y topics de la Rayuela", EJ / "n4_01_ros2_en_vivo.py", None, None,
                                     "ros2 launch rayuela rayuela.launch.py"),
 }
@@ -117,7 +120,7 @@ def main():
         sys.exit(f"Falta el entorno. Prueba: MJLAB list-envs")
     t, jug, ent, val, eq = ENTORNOS[resto[0]]
     if cmd == "params":
-        ruta = jug
+        ruta = jug or val or ent
         print(f"Parametros de {resto[0]}  ({ruta.name}) - se cambian con --set NOMBRE=VALOR\n")
         for n, v, d in parametros(ruta.read_text(encoding="utf-8")):
             print(f"  {n:24s} = {v[:48]:48s} {d[:70]}")

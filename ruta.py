@@ -46,9 +46,9 @@ PASOS = [
      "Que disenar la recompensa es la parte dificil: el robot hace exactamente lo que se premia, no lo que querias.",
      [PY, TALLER / "n2_01_recompensa_en_vivo.py"]),
 
-    ("6 · ENTRENAR", "PPO de verdad, en tu PC (unos 2 minutos)",
+    ("6 · ENTRENAR", "PPO de verdad, en tu PC (unos 3 minutos)",
      "Entrenamos una politica que decide COMO patear la pelota para que caiga en cada casilla de la rayuela: prueba, puntua, ajusta, repite.",
-     "Una curva que sube (la recompensa) y una tabla ANTES / DESPUES: pasa de ~1 a ~6 aciertos de 9.",
+     "Una curva que sube (la recompensa) y una tabla ANTES / DESPUES: pasa de ~1 a ~8 aciertos de 9, y las velocidades aprendidas se parecen a las de la calibracion oficial hecha a mano.",
      "El bucle completo del RL con PPO. Despues cambia UN parametro del fichero (n3_05) y repite: asi se aprende que hace cada boton.",
      [PY, EJ / "n3_05_entrena_la_patada.py"]),
 
@@ -61,6 +61,8 @@ PASOS = [
 
 EXTRAS = [
     ("a", "Patines: otro cuerpo y otro cerebro", EJ / "n4_02_patines.py"),
+    ("h", "Comparar tus politicas entrenadas (varias recompensas)", EJ / "n3_06_comparar_politicas.py"),
+    ("i", "Preparar el SIM-TO-REAL: contrato y robustez antes del robot", EJ / "n5_00_preparar_sim2real.py"),
     ("b", "La cuerda: dos patos tirando", EJ / "n4_03_cuerda.py"),
     ("c", "El equilibrio: tu lo empujas y el se autocorrige", EJ / "n4_04_equilibrio.py"),
     ("d", "El circuito de obstaculos (GTC Berlin): rampa, escalones, cuadricula, escombros", EJ / "n4_05_obstaculos.py"),

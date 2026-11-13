@@ -14,8 +14,8 @@ con que pie y a que velocidad patear. Es el mismo bucle que el entrenamiento rea
 entrenamiento de verdad usa GPU y miles de robots a la vez.)
 
 COMO USARLO: cambia UN parametro, guarda (Ctrl+S) y ejecuta (F5). Mira la curva y la tabla final.
-   Cada patada simulada tarda ~1 s: 60 rondas x 12 patadas = unos 2-3 minutos.
-Al terminar se guarda  mi_tabla_patada.json  y puedes jugar la rayuela con TU politica (n4_00, TABLA_PROPIA).
+   Cada patada simulada tarda ~1 s: 60 rondas x 12 patadas = unos 3 minutos.
+Al terminar se guarda  mis_politicas/<NOMBRE_POLITICA>.json  y puedes jugar la rayuela con TU politica (n4_00, TABLA_PROPIA).
 """
 import json, pathlib, sys, time
 import numpy as np
@@ -31,7 +31,7 @@ sys.path.insert(0, str(AQUI / "windows"))
 PESO_PRECISION = 2.0     # AFECTA A: cuanto duele fallar por metros. Prueba 0 y ve que pasa: sin esto no sabe a donde ir.
 BONUS_ACIERTO = 1.0      # AFECTA A: premia caer DENTRO de la casilla. Prueba 0 (solo premias acercarse) o 5.
 PENALIZA_CAIDA = 3.0     # AFECTA A: castiga las patadas tan fuertes que tiran al pato.
-PESO_FUERZA = 0.0        # AFECTA A: castiga patear fuerte. Prueba 0.5: aprende a "ahorrar" y se queda corto. ¿Por que?
+PESO_FUERZA = 0.0        # AFECTA A: castiga patear fuerte. Prueba 0.5. Prediccion habitual: "ahorra y se queda corto". Medido aqui: acerto 9 de 9. ¿Por que crees que no empeoro?
 
 # ---------- 2. EL ALGORITMO PPO ----------
 ITERACIONES = 60            # AFECTA A: cuantas rondas de aprender. Mas rondas = mas tiempo y mejor (hasta un limite).
@@ -41,7 +41,7 @@ LEARNING_RATE = 0.012        # AFECTA A: el tamaño del ajuste. Muy alto (0.5) s
 CLIP = 0.2                  # AFECTA A: el limite que PPO pone a cuanto cambia la politica en cada ronda (lo que lo hace "estable").
 EPOCAS = 4                  # AFECTA A: cuantas veces se reutilizan los mismos datos en cada ronda.
 EXPLORACION = 0.25          # AFECTA A: cuanto prueba cosas raras al principio (desviacion de la velocidad, en m/s).
-                            #           0.02 = casi no explora y se atasca; 0.6 = prueba de todo.
+                            #           Medido aqui: 0.02 tambien saco 9 de 9 (la tarea es facil); en tareas dificiles explorar poco SI atasca.
 COEF_ENTROPIA = 0.001       # AFECTA A: premio por seguir explorando (mas alto = tarda mas en decidirse).
 SEMILLA = 0                 # AFECTA A: la suerte. Cambiala y repite: ¿sale igual de bien? (en RL casi nunca sale igual).
 
@@ -51,7 +51,10 @@ GRAVEDAD = 9.81             # AFECTA A: la fisica del mundo. 1.62 = Luna: la pel
 MASA_PELOTA = None          # AFECTA A: una pelota mas pesada llega menos lejos. Prueba 0.2 (None = la del modelo).
 ROZAMIENTO_PELOTA = None    # AFECTA A: cuanto rueda tras caer. Prueba 0.05 (hielo) o 1.0.
 
-ARCHIVO_TABLA = AQUI / "mi_tabla_patada.json"      # donde se guarda lo aprendido para jugar con ello
+# Nombre con el que se guarda TU politica en la carpeta mis_politicas/. Cambialo para entrenar VARIAS y compararlas
+# (n3_06_comparar_politicas.py): p. ej. "precisa" con PESO_FUERZA = 0, y "ahorradora" con PESO_FUERZA = 0.5.
+NOMBRE_POLITICA = "mi_tabla_patada"
+ARCHIVO_TABLA = AQUI / "mis_politicas" / f"{NOMBRE_POLITICA}.json"      # donde se guarda lo aprendido para jugar con ello
 
 # ==========================================================================================
 
@@ -187,6 +190,11 @@ def main():
         print(f"  {it:3d}  |      {media:+6.2f}      |  {hits:2d}/{PATADAS_POR_RONDA}   |    {np.exp(pol.p['logstd'][0]):.2f}     | {barra}", flush=True)
     print(f"\nEntrenamiento terminado en {time.time() - t0:.0f} s.")
     aciertos, tabla = evaluar(env, pol, "DESPUES de entrenar")
+    ARCHIVO_TABLA.parent.mkdir(exist_ok=True)
+    tabla["_meta"] = dict(nombre=NOMBRE_POLITICA, aciertos=int(aciertos), iteraciones=ITERACIONES, patadas_por_ronda=PATADAS_POR_RONDA,
+                          learning_rate=LEARNING_RATE, exploracion=EXPLORACION, semilla=SEMILLA, casillas_entrenadas=CASILLAS,
+                          recompensa=dict(precision=PESO_PRECISION, acierto=BONUS_ACIERTO, caida=PENALIZA_CAIDA, fuerza=PESO_FUERZA),
+                          mundo=dict(gravedad=GRAVEDAD, masa_pelota=MASA_PELOTA, rozamiento_pelota=ROZAMIENTO_PELOTA))
     ARCHIVO_TABLA.write_text(json.dumps(tabla, indent=2), encoding="utf-8")
     print(f"\nGuardado: {ARCHIVO_TABLA.name}. Para jugar con TU politica: n4_00_partida_rayuela.py -> TABLA_PROPIA.")
     print("Ahora cambia UN parametro de arriba y compara: ¿que cambia en la curva y en los aciertos?")
