@@ -21,6 +21,14 @@ Cada bloque es una parte de ese camino. Y **entender cada paso** importa porque,
 **Lo importante del camino:** casi nunca sale a la primera, y se vuelve atrás una y otra vez. Por eso hay que **entender cada etapa**: cuando algo falla, sabes cuál tocar.
 Está resumido al final, en *«Si algo falla, ¿qué etapa tocas?»*, con los números que hemos medido.
 
+## Cómo encaja con la descripción oficial del taller y con el vídeo de referencia
+| Bloque | Descripción oficial | El vídeo de referencia (de la simulación al despliegue) |
+|---|---|---|
+| **1 · Modelar** | MuJoCo y escenas propias | Modelo 3D → MJCF (piezas, articulaciones, actuadores) |
+| **2 · El entorno y el RL** | Fundamentos de RL y PPO | El entorno: observaciones, acciones, terminación y recompensa |
+| **3 · Entrenar** | Recompensa estilo mjlab y entrenamiento corto | El script de entrenamiento con PPO; ajustar la recompensa |
+| **4 · Desplegar** | ROS 2 + ONNX: jugar la rayuela con visión, control y teleoperación | Del simulador al mundo real: calibrar, ruido, aleatorización, probar con empujones |
+
 ## Cómo se trabaja (siempre igual)
 1. El ponente explica una idea (2-5 minutos).
 2. Tú abres **un archivo**, cambias **UN número** de los de arriba (cada uno dice en qué afecta), guardas (`Ctrl+S`).
@@ -35,19 +43,18 @@ Si una palabra no la conoces, está en [`GLOSARIO.md`](GLOSARIO.md).
 | Hora | Bloque | Min |
 |---|---|---|
 | 15:00 | Preparar el PC + ignición | 20 |
-| 15:20 | **1 · El robot en el simulador** (modelar) | 30 |
-| 15:50 | **2 · Laboratorio de mundos** | 35 |
+| 15:20 | **1 · MODELAR**: el robot y su mundo | 65 |
 | 16:25 | Descanso | 10 |
-| 16:35 | **3 · El cerebro y la recompensa** (RL, política, PPO) | 40 |
-| 17:15 | **4 · La voltereta: de cero a experto** (entrenar) | 55 |
+| 16:35 | **2 · EL ENTORNO Y EL RL**: el cerebro, la recompensa, PPO | 40 |
+| 17:15 | **3 · ENTRENAR**: la voltereta, de cero a experto | 55 |
 | 18:10 | Descanso | 10 |
-| 18:20 | **5 · Configura tu entrenamiento real** | 35 |
-| 18:55 | **6 · ROS 2 y la partida de la rayuela** | 35 |
-| 19:30 | **7 · Sim-to-real** y cierre | 30 |
+| 18:20 | **3 · ENTRENAR**: configura tu entrenamiento real | 35 |
+| 18:55 | **4 · DESPLEGAR**: ROS 2 y la partida de la rayuela | 35 |
+| 19:30 | **4 · DESPLEGAR**: sim-to-real y cierre | 30 |
 
 ---
 
-## 1 · El robot en el simulador (30 min) · *modelar*
+## 1 · MODELAR · 1.1 El robot en el simulador (30 min)
 *Teoría: del plano al gemelo digital: modelo 3D → STL → URDF → MJCF → MuJoCo. Un robot es un árbol de piezas con articulaciones.*
 
 | Archivo | Qué cambias | Qué ves |
@@ -56,7 +63,7 @@ Si una palabra no la conoces, está en [`GLOSARIO.md`](GLOSARIO.md).
 | `workshop-ia-fisica/exercises/n1_01_ver_pieza.py` | `PIEZA` | Cada pieza 3D del robot |
 | `exercises_rayuela/n0_00_pato_sin_cerebro.py` | `FRICCION`, `FACTOR_MASA`, `EMPUJON`, `VELOCIDAD` | El pato sin IA se cae en menos de 1 s, hagas lo que hagas |
 
-## 2 · Laboratorio de mundos (35 min) · *el entorno: el mundo*
+## 1 · MODELAR · 1.2 El mundo: laboratorio de mundos (35 min)
 *Teoría: la escena es lo que rodea al robot: suelo, cielo, luz, gravedad, objetos.*
 
 | Archivo | Qué cambias | Qué ves |
@@ -64,7 +71,7 @@ Si una palabra no la conoces, está en [`GLOSARIO.md`](GLOSARIO.md).
 | `exercises_rayuela/n1_02_tu_escena.py` | `MUNDO` (luna, marte, hielo, desierto, noche), gravedad, rozamiento, colores, `OBJETOS` (caja, rampa, esfera, cilindro) | El mismo pato en mundos distintos; la pelota vuela en la Luna; un laberinto de cajas |
 | `exercises_rayuela/n4_05_obstaculos.py` | `NIVEL` de 0 a 4, `CEREBRO` | Un circuito en crescendo: rampa, escalones, cuadrícula irregular, escombros |
 
-## 3 · El cerebro y la recompensa (40 min) · *el entorno: qué se ve, qué se hace, qué se premia*
+## 2 · EL ENTORNO Y EL RL (40 min) · *qué se ve, qué se hace, qué se premia, cómo aprende*
 *Teoría: aprender es como montar en bici; el bucle agente-entorno; la red neuronal es una función con botones; la recompensa; PPO.*
 
 | Archivo | Qué cambias | Qué ves |
@@ -74,7 +81,7 @@ Si una palabra no la conoces, está en [`GLOSARIO.md`](GLOSARIO.md).
 | `workshop-ia-fisica/exercises/n2_00_cerebro_en_vivo.py` | `QUITAR_SENTIDO`, `RUIDO_SENTIDOS`, `RUIDO_ORDENES` | Le quitas un sentido al cerebro o le metes ruido: ¿qué es lo que más necesita? |
 | `workshop-ia-fisica/exercises/n2_01_recompensa_en_vivo.py` | Los pesos de la recompensa | La nota del pato mientras lo empujas |
 
-## 4 · La voltereta: de cero a experto (55 min) · *entrenar*
+## 3 · ENTRENAR · 3.1 La voltereta: de cero a experto (55 min)
 *Teoría: el ciclo del entrenamiento; checkpoints; los botones del entrenamiento (rondas, robots a la vez, tasa de aprendizaje, exploración); PPO de verdad.*
 La voltereta es **una habilidad sencilla de describir** y difícil de aprender. Hay nueve **checkpoints** (copias del cerebro guardadas durante un entrenamiento real de 20.750 rondas).
 
@@ -86,7 +93,7 @@ La voltereta es **una habilidad sencilla de describir** y difícil de aprender. 
 | `exercises_rayuela/n3_05_entrena_la_patada.py` | Recompensa, `LEARNING_RATE`, `EXPLORACION`, `ITERACIONES`, `CASILLAS`… | **Entrenas tú, de verdad, en tu CPU (~3 min):** PPO sobre la patada; la curva sube de ~1 a ~8 aciertos de 9 |
 | `exercises_rayuela/n3_06_comparar_politicas.py` | Qué políticas comparas | Tu política frente a otras y frente a la oficial |
 
-## 5 · Configura tu entrenamiento real (35 min) · *lo que se hace antes de pulsar "entrenar"*
+## 3 · ENTRENAR · 3.2 Configura tu entrenamiento real (35 min) · *lo que se hace antes de pulsar "entrenar"*
 *Teoría: mjlab, la herramienta real; una tarea = escena + observaciones + acciones + recompensa + algoritmo; GPU local o en la nube.*
 Sin GPU no se puede entrenar con mjlab, pero **todo lo anterior al botón sí se prepara**. Cada ejercicio lee la configuración oficial, te deja cambiarla y escribe **tu paquete** (`mi_entrenamiento/<caso>/`) listo para lanzar en un PC con GPU o en la nube.
 
@@ -107,7 +114,7 @@ En nuestro circuito: nivel 4 (escombros), `alpha_walking` 3 de 6 · `rough_walk_
 
 Haz el 00 entero; de los otros, elige uno. Lo que se hace en todos: **elegir la tarea → leer la recompensa real → cambiar un peso → generar el paquete → leer el comando**.
 
-## 6 · ROS 2 y la partida de la rayuela (35 min) · *desplegar la política*
+## 4 · DESPLEGAR · 4.1 ROS 2 y la partida de la rayuela (35 min)
 *Teoría: una política es un fichero .onnx; nodos, topics y lanzadores; cómo encajan visión, control y teleoperación.*
 
 | Archivo | Qué cambias | Qué ves |
@@ -115,7 +122,7 @@ Haz el 00 entero; de los otros, elige uno. Lo que se hace en todos: **elegir la 
 | `exercises_rayuela/n4_01_ros2_en_vivo.py` | `VISION`, `CONTROL` | Los nodos y topics de la Rayuela oficial funcionando |
 | `exercises_rayuela/n4_00_partida_rayuela.py` | `TABLA_PROPIA`, `OBJETIVO`, `PUNTOS` | La partida con **tu** política: patada, visión y marcador |
 
-## 7 · Sim-to-real (30 min, con el cierre) · *la brecha y cómo se cierra*
+## 4 · DESPLEGAR · 4.2 Sim-to-real y cierre (30 min) · *la brecha y cómo se cierra*
 *Teoría: la brecha entre simulación y realidad; aleatorización de dominio; la lista antes de llevar una política al robot.*
 
 | Archivo | Qué cambias | Qué ves |

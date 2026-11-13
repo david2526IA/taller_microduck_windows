@@ -33,13 +33,10 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
 
 | Bloque | Qué cambias | Qué ves |
 |---|---|---|
-| 1 · El robot en el simulador | La postura, la fricción, la masa | Un pato sin IA que se cae en menos de 1 s |
-| 2 · Laboratorio de mundos | Gravedad, colores, suelo, objetos, circuito de obstáculos | El mismo robot en la Luna, sobre hielo, en un laberinto |
-| 3 · El cerebro y la recompensa | Sentidos, ruido, pesos de la recompensa | Qué es una política y qué necesita para decidir |
-| 4 · La voltereta: de cero a experto | El checkpoint, y la recompensa y el PPO de la patada | Nueve momentos reales de un entrenamiento; entrenas tú en CPU |
-| 5 · Configura tu entrenamiento real | Pesos y ajustes de un entrenamiento de verdad | Tu paquete listo para lanzar en un PC con GPU |
-| 6 · ROS 2 y la partida | Tu política, el objetivo | La partida de la rayuela con **tu** política |
-| 7 · Sim-to-real | Cuánto varía el mundo al entrenar | Una política que aguanta mundos que no ha visto |
+| **1 · Modelar** (el robot y su mundo) | La postura, la fricción, la masa; gravedad, colores, objetos, circuito de obstáculos | Un pato sin IA que se cae en menos de 1 s; el mismo robot en la Luna, sobre hielo, en un laberinto |
+| **2 · El entorno y el RL** | Sentidos, ruido, pesos de la recompensa | Qué es una política y qué necesita para decidir |
+| **3 · Entrenar** | El checkpoint; la recompensa y el PPO de la patada; los pesos de un entrenamiento real | Nueve momentos reales de un entrenamiento; entrenas tú en CPU; tu paquete listo para una GPU |
+| **4 · Desplegar** | Tu política, el objetivo; cuánto varía el mundo al entrenar | La partida de la rayuela con **tu** política; una política que aguanta mundos que no ha visto |
 
 **El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
 → guarda (Ctrl+S) → **cierra la ventana del robot** → `F5` y observa.
