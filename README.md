@@ -13,7 +13,7 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
    o abre una terminal dentro y escribe `code .`).
 2. Abre la terminal de VS Code (`Ctrl+ñ`; `Ctrl+`` en teclado inglés) y clona **dentro** de la carpeta (con el punto final):
    ```
-   git clone --depth 1 https://github.com/david2526IA/taller_microduck_windows .
+   git clone --depth 1 https://github.com/Bravo-Robots/taller-microduck .
    ```
    El `--depth 1` descarga solo la última versión (la mitad de peso): **imprescindible con wifi justo**. Sin él, el historial completo (~160 MB) puede cortarse a mitad de la descarga («early EOF»); si te pasa, vuelve a clonar con `--depth 1`.
    Sin git: en GitHub, *Code → Download ZIP* y descomprime en `C:\taller`.
@@ -40,7 +40,6 @@ entrenamiento viendo qué pasa, has entrenado un PPO de verdad en tu CPU, y sale
 | **4 · Desplegar** | Tu política, el objetivo; cuánto varía el mundo al entrenar | La partida de la rayuela con **tu** política; una política que aguanta mundos que no ha visto |
 
 **El camino esencial:** hay más ejercicios de los que caben en 5 horas. En [`PROGRAMA.md`](PROGRAMA.md) están marcados como **Esencial** los 12 imprescindibles; el resto (**Extra**) es para quien avance más rápido o para casa.
-**Tu cuaderno:** [`CUADERNO.md`](CUADERNO.md) es una página para **predecir antes de cambiar** y apuntar lo que aprendes.
 
 **El ciclo de trabajo:** abre el archivo → cambia UN parámetro (están arriba, con comentarios que dicen en qué afecta)
 → guarda (Ctrl+S) → **cierra la ventana del robot** → `F5` y observa.
@@ -55,7 +54,7 @@ Todos los ejercicios y sus parámetros, uno a uno: **[`PROBAR.md`](PROBAR.md)**.
 ## Qué hay aquí
 
 ```
-PROGRAMA.md / CUADERNO.md / GLOSARIO.md    el orden del taller (5 h) y sus 12 ejercicios esenciales · tu cuaderno · las palabras sin jerga
+PROGRAMA.md / GLOSARIO.md                  el orden del taller (5 h) y sus 12 ejercicios esenciales · las palabras sin jerga
 INSTALAR.bat / COMPROBAR.bat               preparar el PC · comprobar que todo funciona
 MJLAB.bat (mini_mjlab.py)                  los verbos de mjlab (list-envs, params, play, train, validate) en CPU, con --set
 exercises_rayuela/    los ejercicios del taller (n0 ... n4), con parametros editables

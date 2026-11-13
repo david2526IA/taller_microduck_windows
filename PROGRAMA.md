@@ -12,9 +12,9 @@ Cada bloque es una parte de ese camino. **Entender cada etapa** importa porque, 
 
 ## Cómo se trabaja (siempre igual)
 1. El ponente plantea **una pregunta** y explica una idea (2-5 minutos).
-2. Tú abres **un archivo**, **predices** lo que va a pasar y lo anotas en el [`CUADERNO.md`](CUADERNO.md).
-3. Cambias **UN número** de los de arriba (cada uno dice en qué afecta), guardas (`Ctrl+S`), **cierras la ventana del robot** si hay, y ejecutas otra vez con `F5`.
-4. Comparas con tu predicción. Cuando falla (pasa mucho), es cuando más se aprende.
+2. Tú abres **un archivo**: arriba están los parámetros, y cada uno dice en qué afecta.
+3. Cambias **UN número**, guardas (`Ctrl+S`), **cierras la ventana del robot** si hay, y ejecutas otra vez con `F5`.
+4. Miras qué ha cambiado, y lo comentamos.
 
 Los archivos están en dos carpetas: `workshop-ia-fisica/exercises/` (la serie base, `n1` a `n3`) y `exercises_rayuela/` (el resto).
 Las diapositivas: `workshop-ia-fisica/presentaciones/Presentacion_03_taller_completo.pptx` (y `.pdf`). Si una palabra no la conoces: [`GLOSARIO.md`](GLOSARIO.md).
@@ -115,7 +115,7 @@ La voltereta es **una habilidad sencilla de describir** y difícil de aprender. 
 | Esencial | `workshop-ia-fisica/exercises/n3_07_voltereta_checkpoints.py` | `CHECKPOINT` (0, 500, 750, 1250, 3000, 7000, 11000, 20000, 20750) | El mismo robot en distintos momentos de su aprendizaje: pulsa `R` para la voltereta |
 | Esencial | `workshop-ia-fisica/exercises/n3_08_voltereta_medir.py` | `CHECKPOINTS`, `INTENTOS` | Una tabla con números y la curva real. Medido: aparece a las 750 rondas, se vuelve irregular, se estabiliza hacia las 11.000, y **el 20.000 es peor que el 11.000** |
 | Esencial | `exercises_rayuela/n3_05_entrena_la_patada.py` | Recompensa, `LEARNING_RATE`, `EXPLORACION`, `ITERACIONES`, `CASILLAS`… | **Entrenas tú, de verdad, en tu CPU (~3 min):** PPO sobre la patada; la curva sube de ~1 a ~8 aciertos de 9 |
-| Extra | `workshop-ia-fisica/exercises/n3_04_curvas_entrenamiento.py` | Qué parámetro se cambió | Curvas reales: predices y compruebas |
+| Extra | `workshop-ia-fisica/exercises/n3_04_curvas_entrenamiento.py` | Qué parámetro se cambió | Curvas reales de entrenamiento |
 | Extra | `exercises_rayuela/n3_06_comparar_politicas.py` | Qué políticas comparas | Tu política frente a otras y frente a la oficial |
 
 **Te llevas:** entrenar es una curva con altibajos: se guardan checkpoints, se **mide** y se **elige**. Y has entrenado tú un PPO de verdad.

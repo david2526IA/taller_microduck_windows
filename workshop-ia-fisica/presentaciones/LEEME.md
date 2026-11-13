@@ -20,3 +20,5 @@ Cada diapositiva lleva sus **notas del ponente** (en PowerPoint: Vista → Notas
 
 ## Créditos
 Robot y mallas 3D: Pollen Robotics (CC BY-NC-SA 4.0, uso no comercial). Fotos y vídeos reales: press kit de Pollen Robotics. Imágenes del simulador: renders propios.
+
+Los vídeos están incrustados en el `.pptx` y arrancan solos al llegar a su diapositiva (sin sonido, en bucle). El `.pdf` solo muestra la imagen de portada.
