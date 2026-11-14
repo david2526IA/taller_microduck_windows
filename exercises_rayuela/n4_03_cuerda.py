@@ -58,11 +58,19 @@ B_SOLO_ANDA = False
 # Segundos de combate antes de dar empate.
 TIEMPO_MAX = 20.0
 
+# ETAPA del entrenamiento de cada pato: 0, 500, 1000, 1500, 2000, 3000, 4000, 5000 o 6027 (None = la politica publicada, 6027).
+# La 0 es el cerebro de ANDAR del que se parte; la 6027 es el resultado final (ver windows/politicas/duelo/LEEME.md).
+#   AFECTA A: cuanto ha aprendido cada pato. Prueba ETAPA_A = 1000 contra B_SOLO_ANDA = True: ¿gana? Luego ETAPA_A = 6027: ¿mas entrenado es mejor?
+ETAPA_A = None
+ETAPA_B = None
+
 # ====================================================================
 
 if __name__ == "__main__":
     import duelo
     prueba = "--prueba" in sys.argv
+    carpeta = AQUI / "windows" / "politicas" / "duelo"
+    cerebro = lambda e: None if e is None else carpeta / f"duelo_{e:05d}.onnx"
     duelo.lanzar_duelo(AVANCE_A, AVANCE_B, TIEMPO_MAX, FUERZA_B, MASA_A, MASA_B, ROZAMIENTO_SUELO, LARGO_CUERDA,
-                       DESPLAZAMIENTO, b_solo_anda=B_SOLO_ANDA, ruido_inicial=RUIDO_INICIAL,
+                       DESPLAZAMIENTO, politica_a=cerebro(ETAPA_A), politica_b=cerebro(ETAPA_B), b_solo_anda=B_SOLO_ANDA, ruido_inicial=RUIDO_INICIAL,
                        visor=not prueba, segundos=10 if prueba else None, verbose=prueba)

@@ -175,7 +175,8 @@ En los ejercicios `n6_*` haces siempre lo mismo: **elegir la tarea → leer la r
 | Archivo | Qué es |
 |---|---|
 | `exercises_rayuela/n4_02_patines.py` | El Microduck con ruedas |
-| `exercises_rayuela/n4_03_cuerda.py` | El duelo de la cuerda: dos patos, una cuerda |
+| `exercises_rayuela/n4_03_cuerda.py` | El duelo de la cuerda: dos patos, una cuerda (`ETAPA_A` / `ETAPA_B` eligen una de las 9 etapas del entrenamiento) |
+| `exercises_rayuela/n4_07_duelo_etapas.py` | ¿Más entrenado es mejor? Mide las etapas del duelo con una tabla |
 | `exercises_rayuela/n4_04_equilibrio.py` | Empújalo y se corrige; pruébalo sobre un balancín |
 | `exercises_rayuela/n4_06_validar_politicas.py` | Mide con números los cerebros en el circuito |
 

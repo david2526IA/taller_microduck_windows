@@ -142,6 +142,12 @@ try:
     import contextlib, io
     import duelo
     check("cerebro del duelo (duelo2.onnx)", duelo.POLITICA_DUELO.exists(), "falta windows/politicas/duelo2.onnx")
+    import numpy as _np, onnxruntime as _ort
+    _car = pathlib.Path(duelo.POLITICA_DUELO).parent / "duelo"
+    _et = sorted(_car.glob("duelo_*.onnx"))
+    _o = _np.linspace(-1, 1, 61, dtype=_np.float32)[None, :]
+    _f = lambda p: _ort.InferenceSession(str(p)).run(None, {"obs": _o})[0]
+    check(f"etapas del duelo ({len(_et)} onnx; la 6027 == duelo2.onnx)", len(_et) == 9 and float(abs(_f(_car / "duelo_06027.onnx") - _f(duelo.POLITICA_DUELO)).max()) < 1e-5, "faltan etapas en windows/politicas/duelo")
     with contextlib.redirect_stdout(io.StringIO()):
         m2, d2, ctrl, nombres = duelo.cargar_mundo(1.0, 1.0, 1.0, 1.0, 1.0)
     check(f"escena de la cuerda con motores BAM ({len(nombres)} motores, 2 patos)", len(nombres) == 28)

@@ -2,6 +2,7 @@
 
 | Fichero | Que es | De donde viene |
 |---|---|---|
+| `duelo/duelo_NNNNN.onnx` | Nueve **etapas** del entrenamiento del duelo (iteraciones 0 a 6.027), con su tabla medida | Ver `duelo/LEEME.md`. |
 | `duelo2.onnx` | Cerebro del **duelo de la cuerda** (autojuego, 61 entradas y 14 salidas) | Proyecto `patos_cuerda` (Bravo Robots): carrera `2026-10-08_22-18-18_duelo2` de la rama `tug-etapas` de `microduck_rl`, hasta la iteracion 6027, exportada a ONNX por el propio entrenamiento. Entrenado con mjlab + PPO en GPU. |
 
 Recompensas del entrenamiento (perfil DUELO): `competitive_terminal=200, timeout_stalemate=-8, fall_duel=0, fall_any=-20, pull_back_taut=10, rope_taut=0.5, tug_pull_velocity=4`.
